@@ -10,7 +10,7 @@ import java.util.List;
 
 public class WorkCateg extends JFrame implements ActionListener {
     private JButton btnHome, btnPersonal, btnWork, btnPayment;
-    private JLabel lblTitle;
+    private JLabel lblTitle, imglogo;
     private List<ItemPanel> pnlItems;
     private Connection conn;
     private List<Item> lstItems;
@@ -29,6 +29,11 @@ public class WorkCateg extends JFrame implements ActionListener {
         setLayout(null);
         getContentPane().setBackground(new Color(255, 204, 153)); 
 
+        imglogo = new JLabel();
+        imglogo.setIcon(new ImageIcon(new ImageIcon("C:\\Users\\noctafly\\Desktop\\baguaa\\New Folder\\aad\\OSP-FINAL---GROUP-1\\OSP-FINAL---GROUP-1\\images\\logo.png").getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH)));
+        imglogo.setBounds(10, 7, 50, 50);
+        add(imglogo);
+        
         lblTitle = new JLabel("WORK CATEGORY");
         lblTitle.setFont(new Font("Arial", Font.BOLD, 20));
         lblTitle.setBounds(280, 10, 250, 30);

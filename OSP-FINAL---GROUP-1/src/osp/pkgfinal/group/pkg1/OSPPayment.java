@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OSPPayment extends JFrame implements ActionListener {
-    private JLabel lblname, lbladd, lblcontact, lblcustomer, lblmop, lblamount, lblSelectedItems, lblTotalPrice;
+    private JLabel lblname, lbladd, lblcontact, lblcustomer, lblmop, lblamount, lblSelectedItems, lblTotalPrice, imglogo;
     private JButton btnPurchase, btnHome, btnDelete, btnReceipt;
     private JTextField txtname, txtadd, txtcontact, txtamount;
     private JComboBox<String> cmbmop;
@@ -37,6 +37,11 @@ public class OSPPayment extends JFrame implements ActionListener {
         setLayout(new BorderLayout());
         getContentPane().setBackground(new Color(255, 204, 153)); 
 
+        imglogo = new JLabel();
+        imglogo.setIcon(new ImageIcon(new ImageIcon("C:\\Users\\noctafly\\Desktop\\baguaa\\New Folder\\aad\\OSP-FINAL---GROUP-1\\OSP-FINAL---GROUP-1\\images\\logo.png").getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH)));
+        imglogo.setBounds(10, 7, 50, 50);
+        add(imglogo);
+        
         initializeDBConnection();
 
         customerPanel = new JPanel();
@@ -45,7 +50,7 @@ public class OSPPayment extends JFrame implements ActionListener {
         customerPanel.setBackground(new Color(255, 204, 153)); 
 
         lblcustomer = new JLabel("CUSTOMER'S INFORMATION");
-        lblcustomer.setBounds(20, 20, 250, 30);
+        lblcustomer.setBounds(90, 20, 250, 30);
         lblcustomer.setFont(new Font("Georgia", Font.BOLD, 16));
 
         lblname = new JLabel("Name:");

@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 
 public class HomePage extends JFrame implements ActionListener {
     private JButton btnHome, btnPersonal, btnWork, btnBack;
-    private JLabel title;
+    private JLabel title, imglogo;
 
     public HomePage() {
         setTitle("Main Menu");
@@ -17,10 +17,14 @@ public class HomePage extends JFrame implements ActionListener {
         setLayout(null);
         getContentPane().setBackground(new Color(255, 204, 153));
 
-
+        imglogo = new JLabel();
+        imglogo.setIcon(new ImageIcon(new ImageIcon("C:\\Users\\noctafly\\Desktop\\baguaa\\New Folder\\aad\\OSP-FINAL---GROUP-1\\OSP-FINAL---GROUP-1\\images\\logo.png").getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH)));
+        imglogo.setBounds(35, 20, 50, 50);
+        add(imglogo);
+        
         title = new JLabel("Welcome to Our Online Shopping Platform");
         title.setFont(new Font("Georgia", Font.BOLD, 20));
-        title.setBounds(75, 30, 500, 30);
+        title.setBounds(95, 30, 500, 30);
         title.setForeground(new Color(102, 51, 0));
         add(title);
 

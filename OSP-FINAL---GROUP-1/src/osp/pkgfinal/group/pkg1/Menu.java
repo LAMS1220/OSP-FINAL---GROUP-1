@@ -1,6 +1,6 @@
 package osp.pkgfinal.group.pkg1;
 
-import java.awt.Color;
+import java.awt.*;
 import java.awt.EventQueue;
 import java.awt.Font;
 import javax.swing.*;
@@ -9,13 +9,18 @@ import java.awt.event.ActionListener;
 
 public class Menu extends JFrame implements ActionListener {
     
-    private JLabel lblTitle, lblSignUp;                                                                                                                                                                                                                                                                                             
+    private JLabel lblTitle, lblSignUp, imglogo;                                                                                                                                                                                                                                                                                             
     private JButton btnRegister, btnAdmin, btncus; 
     
     public Menu() {
         setSize(500, 350);
         setTitle("Admin Portal");
         getContentPane().setBackground(new Color(255, 204, 153));
+        
+        imglogo = new JLabel();
+        imglogo.setIcon(new ImageIcon(new ImageIcon("C:\\Users\\noctafly\\Desktop\\baguaa\\New Folder\\aad\\OSP-FINAL---GROUP-1\\OSP-FINAL---GROUP-1\\images\\logo.png").getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH)));
+        imglogo.setBounds(40, 55, 50, 50);
+        add(imglogo);
 
         lblTitle = new JLabel("ONLINE SHOPPING PLATFORM");
         lblTitle.setFont(new Font("Georgia", Font.BOLD, 20));
@@ -40,7 +45,7 @@ public class Menu extends JFrame implements ActionListener {
         add(btncus);
         add(lblSignUp);
         
-        lblTitle.setBounds(80, 40, 350, 80);
+        lblTitle.setBounds(100, 40, 350, 80);
         lblSignUp.setBounds(200, 250, 250, 20);
         btnRegister.setBounds(360, 250, 100, 20);
         btnAdmin.setBounds(80, 150, 150, 30);
