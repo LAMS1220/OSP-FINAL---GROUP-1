@@ -17,7 +17,7 @@ public class HomePage extends JFrame implements ActionListener {
         setLayout(null);
         getContentPane().setBackground(new Color(255, 204, 153));
 
-       
+
         title = new JLabel("Welcome to Our Online Shopping Platform");
         title.setFont(new Font("Georgia", Font.BOLD, 20));
         title.setBounds(75, 30, 500, 30);

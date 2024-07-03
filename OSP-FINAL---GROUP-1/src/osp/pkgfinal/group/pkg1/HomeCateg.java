@@ -129,7 +129,6 @@ public class HomeCateg extends JFrame implements ActionListener {
     }
 
     private void updateCart() {
-        // Implement if needed
     }
 
     private class ItemPanel extends JPanel implements ActionListener {
@@ -154,7 +153,6 @@ public class HomeCateg extends JFrame implements ActionListener {
             btnAddToCart = new JButton("Add to Cart");
             btnSeeImage = new JButton("See Product Image"); 
 
-            // Apply unified button style
             btnAddToCart.setFont(new Font("Arial", Font.BOLD, 14));
             btnAddToCart.setBackground(new Color(255, 153, 0)); 
             btnAddToCart.setForeground(Color.WHITE); 

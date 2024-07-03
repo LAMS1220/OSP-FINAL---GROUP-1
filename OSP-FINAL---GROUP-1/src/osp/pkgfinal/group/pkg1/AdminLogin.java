@@ -116,9 +116,4 @@ public class AdminLogin extends JFrame implements ActionListener {
             e.printStackTrace();
         }
         return false;
-    }
-
-    public static void main(String[] args) {
-        new AdminLogin();
-    }
-}
+    }}
