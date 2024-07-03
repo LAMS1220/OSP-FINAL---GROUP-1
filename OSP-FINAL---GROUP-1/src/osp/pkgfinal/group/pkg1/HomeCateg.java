@@ -3,6 +3,7 @@ package osp.pkgfinal.group.pkg1;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +19,7 @@ public class HomeCateg extends JFrame implements ActionListener {
     private static final String URL = "jdbc:mysql://localhost:3306/osp";
     private static final String USER = "lance";
     private static final String PASSWORD = "12345";
+    private static final String IMAGE_DIR = "images"; // Directory where images are stored
 
     public HomeCateg() {
         setTitle("HOME ITEMS CATEGORY");
@@ -25,7 +27,7 @@ public class HomeCateg extends JFrame implements ActionListener {
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
-        getContentPane().setBackground(new Color(255, 204, 153)); // Setting background color similar to PersonalCateg
+        getContentPane().setBackground(new Color(255, 204, 153));   
 
         lblTitle = new JLabel("HOME CATEGORY");
         lblTitle.setFont(new Font("Arial", Font.BOLD, 20));
@@ -36,8 +38,8 @@ public class HomeCateg extends JFrame implements ActionListener {
         btnPayment = new JButton("PAYMENT");
         btnPayment.setBounds(660, 10, 110, 30);
         btnPayment.setFont(new Font("Arial", Font.BOLD, 14));
-        btnPayment.setBackground(new Color(255, 153, 0)); // Orange background color
-        btnPayment.setForeground(Color.WHITE); // White text color
+        btnPayment.setBackground(Color.WHITE); 
+        btnPayment.setForeground(new Color(102, 51, 0));
         btnPayment.addActionListener(this);
         add(btnPayment);
 
@@ -47,22 +49,22 @@ public class HomeCateg extends JFrame implements ActionListener {
 
         btnHome.setBounds(150, 60, 100, 30);
         btnHome.setFont(new Font("Arial", Font.BOLD, 14));
-        btnHome.setBackground(new Color(255, 153, 0)); // Orange background color
-        btnHome.setForeground(Color.WHITE); // White text color
+        btnHome.setBackground(Color.WHITE); 
+        btnHome.setForeground(new Color(102, 51, 0));
         btnHome.addActionListener(this);
         add(btnHome);
 
         btnPersonal.setBounds(300, 60, 110, 30);
         btnPersonal.setFont(new Font("Arial", Font.BOLD, 14));
-        btnPersonal.setBackground(new Color(255, 153, 0)); // Orange background color
-        btnPersonal.setForeground(Color.WHITE); // White text color
+        btnPersonal.setBackground(Color.WHITE); 
+        btnPersonal.setForeground(new Color(102, 51, 0));
         btnPersonal.addActionListener(this);
         add(btnPersonal);
 
         btnWork.setBounds(450, 60, 100, 30);
         btnWork.setFont(new Font("Arial", Font.BOLD, 14));
-        btnWork.setBackground(new Color(255, 153, 0)); // Orange background color
-        btnWork.setForeground(Color.WHITE); // White text color
+        btnWork.setBackground(Color.WHITE); 
+        btnWork.setForeground(new Color(102, 51, 0));
         btnWork.addActionListener(this);
         add(btnWork);
 
@@ -76,9 +78,9 @@ public class HomeCateg extends JFrame implements ActionListener {
         itemsPanel.setLayout(new GridLayout(0, 1, 0, 10)); // Adjusted to include vertical gap of 10 pixels
         itemsPanel.setBounds(50, 100, 660, 400); // Adjusted position and size
 
-        addItem(itemsPanel, "Stainless Steel Utensils Set", 50.00);
-        addItem(itemsPanel, "OMNI 5m Extension", 5.35);
-        addItem(itemsPanel, "URATEX Bed Foam King Size", 291.82);
+        addItem(itemsPanel, "Stainless Steel Utensils Set", 50.00, "utensils.png");
+        addItem(itemsPanel, "OMNI 5m Extension", 5.35, "omni.png");
+        addItem(itemsPanel, "URATEX Bed Foam King Size", 291.82, "uratex.png");
 
         add(itemsPanel);
 
@@ -96,8 +98,8 @@ public class HomeCateg extends JFrame implements ActionListener {
         }
     }
 
-    private void addItem(JPanel panel, String itemName, double itemPrice) {
-        ItemPanel itemPanel = new ItemPanel(itemName, itemPrice);
+    private void addItem(JPanel panel, String itemName, double itemPrice, String imageFileName) {
+        ItemPanel itemPanel = new ItemPanel(new Item(itemName, itemPrice, imageFileName));
         pnlItems.add(itemPanel);
         panel.add(itemPanel);
     }
@@ -134,21 +136,21 @@ public class HomeCateg extends JFrame implements ActionListener {
         private JLabel lblItemName;
         private JLabel lblItemPrice;
         private JButton btnAddToCart;
-        private JButton btnSeeImage; // Button for viewing product image
+        private JButton btnSeeImage;
+        private Item item;
 
-        public ItemPanel(String itemName, double itemPrice) {
+        public ItemPanel(Item item) {
+            this.item = item;
+
             setLayout(new BorderLayout());
 
-            // Left panel for labels
-            JPanel leftPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-            lblItemName = new JLabel(itemName);
-            lblItemPrice = new JLabel("$" + itemPrice);
-            leftPanel.add(lblItemName);
-            leftPanel.add(lblItemPrice);
-            add(leftPanel, BorderLayout.WEST);
+            JPanel textPanel = new JPanel(new FlowLayout(FlowLayout.LEFT)); // Panel for item name and price
+            lblItemName = new JLabel(item.getName());
+            lblItemPrice = new JLabel("$" + item.getPrice());
+            textPanel.add(lblItemName);
+            textPanel.add(lblItemPrice);
 
-            // Right panel for buttons
-            JPanel rightPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+            JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT)); // Panel for buttons
             btnAddToCart = new JButton("Add to Cart");
             btnSeeImage = new JButton("See Product Image"); // Initialize button for viewing product image
 
@@ -162,9 +164,11 @@ public class HomeCateg extends JFrame implements ActionListener {
             btnSeeImage.setBackground(Color.LIGHT_GRAY); // Light gray background for contrast
             btnSeeImage.addActionListener(this);
 
-            rightPanel.add(btnAddToCart);
-            rightPanel.add(btnSeeImage);
-            add(rightPanel, BorderLayout.EAST);
+            buttonPanel.add(btnAddToCart);
+            buttonPanel.add(btnSeeImage);
+
+            add(textPanel, BorderLayout.CENTER);
+            add(buttonPanel, BorderLayout.EAST);
         }
 
         @Override
@@ -172,13 +176,12 @@ public class HomeCateg extends JFrame implements ActionListener {
             if (e.getSource() == btnAddToCart) {
                 addItemToCart(lblItemName.getText(), Double.parseDouble(lblItemPrice.getText().substring(1)));
             } else if (e.getSource() == btnSeeImage) {
-                // Handle action to show product image (replace with actual implementation)
-                showProductImage(lblItemName.getText());
+                showProductImage(item.getImageFileName());
             }
         }
 
         private void addItemToCart(String itemName, double itemPrice) {
-            lstItems.add(new Item(itemName, itemPrice));
+            lstItems.add(new Item(itemName, itemPrice, item.getImageFileName()));
             totalPrice += itemPrice;
             updateCart();
 
@@ -190,39 +193,54 @@ public class HomeCateg extends JFrame implements ActionListener {
                 try (ResultSet generatedKeys = insertItemStmt.getGeneratedKeys()) {
                     if (generatedKeys.next()) {
                         int itemId = generatedKeys.getInt(1);
-                        try (PreparedStatement insertPaymentStmt = conn.prepareStatement("INSERT INTO payments (item_id, customer_name, customer_address, customer_phone, payment_status) VALUES (?, ?, ?, ?, ?)")) {
+                        try (PreparedStatement insertPaymentStmt = conn.prepareStatement("INSERT INTO payment (item_id, price) VALUES (?, ?)")) {
                             insertPaymentStmt.setInt(1, itemId);
-                            insertPaymentStmt.setString(2, "Customer Name");
-                            insertPaymentStmt.setString(3, "Customer Address");
-                            insertPaymentStmt.setString(4, "Customer Phone");
-                            insertPaymentStmt.setString(5, "Pending");
+                            insertPaymentStmt.setDouble(2, itemPrice);
                             insertPaymentStmt.executeUpdate();
                         }
                     }
                 }
             } catch (SQLException ex) {
                 ex.printStackTrace();
-                JOptionPane.showMessageDialog(HomeCateg.this, "Failed to add item to cart: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
-        }
-
-        private void showProductImage(String itemName) {
-            // Placeholder method for showing product image
-            JOptionPane.showMessageDialog(HomeCateg.this, "Product Image for " + itemName, "Product Image", JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
+    private void showProductImage(String imageFileName) {
+        JDialog imageDialog = new JDialog(HomeCateg.this, "Product Image", true);
+        imageDialog.setSize(400, 400);
+        imageDialog.setLayout(new BorderLayout());
+
+        String imagePath = IMAGE_DIR + File.separator + imageFileName;
+        ImageIcon productImage = new ImageIcon(imagePath);
+        Image scaledImage = productImage.getImage().getScaledInstance(400, 400, Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(scaledImage);
+        JLabel lblImage = new JLabel(scaledIcon);
+        lblImage.setHorizontalAlignment(SwingConstants.CENTER);
+        lblImage.setVerticalAlignment(SwingConstants.CENTER);
+        imageDialog.add(lblImage, BorderLayout.CENTER);
+
+        JButton btnClose = new JButton("Close");
+        btnClose.addActionListener(e -> imageDialog.dispose());
+        imageDialog.add(btnClose, BorderLayout.SOUTH);
+
+        imageDialog.setLocationRelativeTo(this); // Centers the dialog relative to HomeCateg frame
+        imageDialog.setVisible(true);
+    }
+
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new HomeCateg());
+        new HomeCateg();
     }
 
     private class Item {
         private String name;
         private double price;
+        private String imageFileName;
 
-        public Item(String name, double price) {
+        public Item(String name, double price, String imageFileName) {
             this.name = name;
             this.price = price;
+            this.imageFileName = imageFileName;
         }
 
         public String getName() {
@@ -231,6 +249,10 @@ public class HomeCateg extends JFrame implements ActionListener {
 
         public double getPrice() {
             return price;
+        }
+
+        public String getImageFileName() {
+            return imageFileName;
         }
     }
 }

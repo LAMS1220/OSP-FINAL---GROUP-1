@@ -10,15 +10,20 @@ public class AdminMenu extends JFrame implements ActionListener {
 
     public AdminMenu() {
         setTitle("Admin Menu");
-        setSize(400, 200);
-        setLayout(null);
-
+        setSize(400, 220);
+        setLayout(null);     
+        getContentPane().setBackground(new Color(255, 204, 153));
+        
         btnViewRecords = new JButton("View Records");
         btnViewRecords.setBounds(100, 50, 200, 30);
+        btnViewRecords.setBackground(Color.WHITE); 
+        btnViewRecords.setForeground(new Color(102, 51, 0)); 
         btnViewRecords.addActionListener(this);
 
         btnReturn = new JButton("Return");
         btnReturn.setBounds(100, 100, 200, 30);
+        btnReturn.setBackground(Color.WHITE); 
+        btnReturn.setForeground(new Color(102, 51, 0)); 
         btnReturn.addActionListener(this);
 
         add(btnViewRecords);

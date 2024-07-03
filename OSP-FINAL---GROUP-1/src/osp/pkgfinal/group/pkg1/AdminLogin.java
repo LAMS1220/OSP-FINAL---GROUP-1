@@ -17,11 +17,13 @@ public class AdminLogin extends JFrame implements ActionListener {
         initializeDBConnection();
 
         setTitle("Admin Login");
-        setLayout(null);
-
+        setLayout(null);       
+        getContentPane().setBackground(new Color(255, 204, 153));
+        
+        
         lblTitle = new JLabel("ADMIN LOGIN");
-        lblTitle.setFont(new Font("Arial", Font.BOLD, 24));
-        lblTitle.setBounds(110, 20, 250, 30);
+        lblTitle.setFont(new Font("Georgia", Font.BOLD, 24));
+        lblTitle.setBounds(90, 20, 250, 30);
 
         lblUsername = new JLabel("Username:");
         lblUsername.setBounds(50, 80, 100, 25);
@@ -42,11 +44,15 @@ public class AdminLogin extends JFrame implements ActionListener {
         btnLogin = new JButton("Login");
         btnLogin.setBounds(50, 180, 100, 30);
         btnLogin.setFont(new Font("Arial", Font.BOLD, 15));
+        btnLogin.setBackground(Color.WHITE); 
+        btnLogin.setForeground(new Color(102, 51, 0)); 
         btnLogin.addActionListener(this);
 
         btnBack = new JButton("Back");
         btnBack.setBounds(200, 180, 100, 30);
         btnBack.setFont(new Font("Arial", Font.BOLD, 15));
+        btnBack.setBackground(Color.WHITE); 
+        btnBack.setForeground(new Color(102, 51, 0)); ; 
         btnBack.addActionListener(this);
 
         add(lblTitle);
@@ -57,7 +63,7 @@ public class AdminLogin extends JFrame implements ActionListener {
         add(btnLogin);
         add(btnBack);
 
-        setSize(400, 300);
+        setSize(380, 300);
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);

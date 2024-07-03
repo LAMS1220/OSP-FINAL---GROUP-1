@@ -20,10 +20,10 @@ public class AdminRegister extends JFrame implements ActionListener {
         setTitle("Admin Registration");
         setSize(400, 300);
         setLayout(null);
-        getContentPane().setBackground(new Color(255, 204, 153)); // Setting background color
+        getContentPane().setBackground(new Color(255, 204, 153));
 
         lblTitle = new JLabel("ADMIN REGISTRATION");
-        lblTitle.setBounds(70, 20, 250, 30);
+        lblTitle.setBounds(75, 20, 250, 30);
         lblTitle.setFont(new Font("Georgia", Font.BOLD, 19)); // Using a bold font with a similar style
         lblTitle.setForeground(new Color(102, 51, 0)); // Darker shade for better contrast
        
@@ -48,15 +48,15 @@ public class AdminRegister extends JFrame implements ActionListener {
         btnRegister = new JButton("Register");
         btnRegister.setBounds(50, 180, 100, 30);
         btnRegister.setFont(new Font("Arial", Font.BOLD, 14));
-        btnRegister.setBackground(Color.WHITE);
-        btnRegister.setForeground(new Color(102, 51, 0)); // Darker shade for better contrast
+        btnRegister.setBackground(Color.WHITE); 
+        btnRegister.setForeground(new Color(102, 51, 0)); 
         btnRegister.addActionListener(this);
 
         btnBack = new JButton("Back");
         btnBack.setBounds(230, 180, 100, 30);
         btnBack.setFont(new Font("Arial", Font.BOLD, 14));
-        btnBack.setBackground(Color.WHITE);
-        btnBack.setForeground(new Color(102, 51, 0)); // Darker shade for better contrast
+        btnBack.setBackground(Color.WHITE); 
+        btnBack.setForeground(new Color(102, 51, 0)); 
         btnBack.addActionListener(this);
 
         add(lblTitle);

@@ -1,5 +1,6 @@
 package osp.pkgfinal.group.pkg1;
 
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
 import javax.swing.*;
@@ -12,18 +13,25 @@ public class Menu extends JFrame implements ActionListener {
     private JButton btnRegister, btnAdmin, btncus; 
     
     public Menu() {
-        setSize(500, 500);
+        setSize(500, 350);
         setTitle("Admin Portal");
+        getContentPane().setBackground(new Color(255, 204, 153));
 
         lblTitle = new JLabel("ONLINE SHOPPING PLATFORM");
-        lblTitle.setFont(new Font("Arial", Font.BOLD, 20));
+        lblTitle.setFont(new Font("Georgia", Font.BOLD, 20));
         
         lblSignUp = new JLabel("Register as Administrator");
         lblSignUp.setFont(new Font("Bell MT", Font.PLAIN, 14));
 
         btnRegister = new JButton("Sign Up");
+        btnRegister.setBackground(Color.WHITE); 
+        btnRegister.setForeground(new Color(102, 51, 0));
         btnAdmin = new JButton("ADMIN");
+        btnAdmin.setBackground(Color.WHITE); 
+        btnAdmin.setForeground(new Color(102, 51, 0));
         btncus = new JButton ("CUSTOMER");
+        btncus.setBackground(Color.WHITE); 
+        btncus.setForeground(new Color(102, 51, 0));
         
         
         add(lblTitle);
@@ -32,9 +40,9 @@ public class Menu extends JFrame implements ActionListener {
         add(btncus);
         add(lblSignUp);
         
-        lblTitle.setBounds(100, 40, 300, 80);
-        lblSignUp.setBounds(220, 400, 250, 20);
-        btnRegister.setBounds(380, 400, 100, 20);
+        lblTitle.setBounds(80, 40, 350, 80);
+        lblSignUp.setBounds(200, 250, 250, 20);
+        btnRegister.setBounds(360, 250, 100, 20);
         btnAdmin.setBounds(80, 150, 150, 30);
         btncus.setBounds(270, 150, 150, 30);
         

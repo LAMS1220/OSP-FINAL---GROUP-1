@@ -35,16 +35,18 @@ public class OSPPayment extends JFrame implements ActionListener {
         setTitle("PAYMENT");
         setSize(600, 700);
         setLayout(new BorderLayout());
+        getContentPane().setBackground(new Color(255, 204, 153)); // Set background color
 
         initializeDBConnection();
 
         customerPanel = new JPanel();
         customerPanel.setLayout(null);
         customerPanel.setPreferredSize(new Dimension(600, 300));
+        customerPanel.setBackground(new Color(255, 204, 153)); // Set background color
 
         lblcustomer = new JLabel("CUSTOMER'S INFORMATION");
         lblcustomer.setBounds(20, 20, 250, 30);
-        lblcustomer.setFont(new Font("Arial", Font.BOLD, 16));
+        lblcustomer.setFont(new Font("Georgia", Font.BOLD, 16));
 
         lblname = new JLabel("Name:");
         lblname.setBounds(100, 70, 100, 30);
@@ -86,6 +88,8 @@ public class OSPPayment extends JFrame implements ActionListener {
         cmbmop = new JComboBox<>(paymentMethods);
         cmbmop.setBounds(250, 230, 200, 30);
         cmbmop.setFont(new Font("Arial", Font.PLAIN, 15));
+        cmbmop.setBackground(Color.WHITE); 
+        cmbmop.setForeground(new Color(102, 51, 0));
 
         add(lblcustomer);
         add(lblname);
@@ -101,9 +105,10 @@ public class OSPPayment extends JFrame implements ActionListener {
 
         itemsPanel = new JPanel();
         itemsPanel.setLayout(new BorderLayout());
+        itemsPanel.setBackground(new Color(255, 204, 153)); // Set background color
 
         lblSelectedItems = new JLabel("SELECTED ITEMS");
-        lblSelectedItems.setFont(new Font("Arial", Font.BOLD, 16));
+        lblSelectedItems.setFont(new Font("Georgia", Font.BOLD, 16));
         itemsPanel.add(lblSelectedItems, BorderLayout.NORTH);
 
         String[] columnNames = {"Item Name", "Price"};
@@ -125,27 +130,36 @@ public class OSPPayment extends JFrame implements ActionListener {
         itemsPanel.add(scrollPane, BorderLayout.CENTER);
 
         lblTotalPrice = new JLabel("Total Price: $" + totalPrice);
-        lblTotalPrice.setFont(new Font("Arial", Font.BOLD, 16));
+        lblTotalPrice.setFont(new Font("Georgia", Font.BOLD, 16));
         itemsPanel.add(lblTotalPrice, BorderLayout.SOUTH);
 
         buttonPanel = new JPanel();
         buttonPanel.setLayout(new BorderLayout());
         buttonPanel.setPreferredSize(new Dimension(600, 50));
+        buttonPanel.setBackground(new Color(255, 204, 153)); // Set background color
 
         btnHome = new JButton("HOME");
         btnHome.setPreferredSize(new Dimension(100, 30));
+        btnHome.setBackground(Color.WHITE);
+        btnHome.setForeground(new Color(102, 51, 0));
         btnHome.addActionListener(this);
-        
+
         btnDelete = new JButton("DELETE");
         btnDelete.setPreferredSize(new Dimension(100, 30));
+        btnDelete.setBackground(Color.WHITE);
+        btnDelete.setForeground(new Color(102, 51, 0));
         btnDelete.addActionListener(this);
-        
+
         btnPurchase = new JButton("PURCHASE");
         btnPurchase.setPreferredSize(new Dimension(100, 30));
+        btnPurchase.setBackground(Color.WHITE);
+        btnPurchase.setForeground(new Color(102, 51, 0));
         btnPurchase.addActionListener(this);
 
         btnReceipt = new JButton("GENERATE RECEIPT");
         btnReceipt.setPreferredSize(new Dimension(150, 30));
+        btnReceipt.setBackground(Color.WHITE);
+        btnReceipt.setForeground(new Color(102, 51, 0));
         btnReceipt.addActionListener(this);
 
         JPanel leftPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -209,6 +223,7 @@ public class OSPPayment extends JFrame implements ActionListener {
                 JOptionPane.showMessageDialog(this, "Purchase successful");
             } catch (SQLException ex) {
                 ex.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Error: Failed to complete purchase");
             }
 
         } else if (e.getSource() == btnHome) {
@@ -226,7 +241,7 @@ public class OSPPayment extends JFrame implements ActionListener {
         } else if (e.getSource() == btnReceipt) {
             double amount = Double.parseDouble(txtamount.getText());
             double updatedTotalPrice = totalPrice - amount;
-            new Receipt ( txtname.getText(), txtadd.getText(), txtcontact.getText(), txtamount.getText(), cmbmop.getSelectedItem().toString(), selectedItems, updatedTotalPrice);
+            new Receipt(txtname.getText(), txtadd.getText(), txtcontact.getText(), txtamount.getText(), cmbmop.getSelectedItem().toString(), selectedItems, updatedTotalPrice);
         }
     }
 

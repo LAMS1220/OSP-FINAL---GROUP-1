@@ -15,7 +15,7 @@ public class HomePage extends JFrame implements ActionListener {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
         setLayout(null);
-        getContentPane().setBackground(new Color(255, 204, 153)); // Setting background color similar to Menu frame
+        getContentPane().setBackground(new Color(255, 204, 153));
 
         // Title label
         title = new JLabel("Welcome to Our Online Shopping Platform");
@@ -28,32 +28,32 @@ public class HomePage extends JFrame implements ActionListener {
         btnHome = new JButton("Home Items");
         btnHome.setBounds(80, 100, 120, 40); // Adjusted button size
         btnHome.setFont(new Font("Arial", Font.BOLD, 14));
-        btnHome.setBackground(Color.WHITE); // Setting button background to white
-        btnHome.setForeground(new Color(102, 51, 0)); // Darker shade for better contrast
+        btnHome.setBackground(Color.WHITE); 
+        btnHome.setForeground(new Color(102, 51, 0));
         add(btnHome);
 
         // Personal Items button
         btnPersonal = new JButton("Personal Items");
         btnPersonal.setBounds(230, 100, 140, 40); // Adjusted button size
         btnPersonal.setFont(new Font("Arial", Font.BOLD, 14));
-        btnPersonal.setBackground(Color.WHITE); // Setting button background to white
-        btnPersonal.setForeground(new Color(102, 51, 0)); // Darker shade for better contrast
+        btnPersonal.setBackground(Color.WHITE); 
+        btnPersonal.setForeground(new Color(102, 51, 0));
         add(btnPersonal);
 
         // Work Items button
         btnWork = new JButton("Work Items");
         btnWork.setBounds(400, 100, 120, 40); // Adjusted button size
         btnWork.setFont(new Font("Arial", Font.BOLD, 14));
-        btnWork.setBackground(Color.WHITE); // Setting button background to white
-        btnWork.setForeground(new Color(102, 51, 0)); // Darker shade for better contrast
+        btnWork.setBackground(Color.WHITE); 
+        btnWork.setForeground(new Color(102, 51, 0));
         add(btnWork);
 
         // Return button
         btnBack = new JButton("Return");
         btnBack.setBounds(440, 180, 100, 30); // Adjusted button size
         btnBack.setFont(new Font("Arial", Font.BOLD, 14));
-        btnBack.setBackground(Color.WHITE); // Setting button background to white
-        btnBack.setForeground(new Color(102, 51, 0)); // Darker shade for better contrast
+        btnBack.setBackground(Color.WHITE); 
+        btnBack.setForeground(new Color(102, 51, 0));
         add(btnBack);
 
         // Action listeners

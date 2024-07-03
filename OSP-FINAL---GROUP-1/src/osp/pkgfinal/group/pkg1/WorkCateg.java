@@ -38,8 +38,8 @@ public class WorkCateg extends JFrame implements ActionListener {
         btnPayment = new JButton("PAYMENT");
         btnPayment.setBounds(660, 10, 110, 30);
         btnPayment.setFont(new Font("Arial", Font.BOLD, 14));
-        btnPayment.setBackground(new Color(255, 153, 0)); // Orange background color
-        btnPayment.setForeground(Color.WHITE); // White text color
+        btnPayment.setBackground(Color.WHITE); 
+        btnPayment.setForeground(new Color(102, 51, 0));
         btnPayment.addActionListener(this);
         add(btnPayment);
 
@@ -47,25 +47,24 @@ public class WorkCateg extends JFrame implements ActionListener {
         btnPersonal = new JButton("PERSONAL");
         btnWork = new JButton("WORK");
 
-        Dimension buttonSize = new Dimension(100, 30);
         btnHome.setBounds(150, 60, 100, 30);
         btnHome.setFont(new Font("Arial", Font.BOLD, 14));
-        btnHome.setBackground(new Color(255, 153, 0)); // Orange background color
-        btnHome.setForeground(Color.WHITE); // White text color
+        btnHome.setBackground(Color.WHITE); 
+        btnHome.setForeground(new Color(102, 51, 0));
         btnHome.addActionListener(this);
         add(btnHome);
 
         btnPersonal.setBounds(300, 60, 110, 30);
         btnPersonal.setFont(new Font("Arial", Font.BOLD, 14));
-        btnPersonal.setBackground(new Color(255, 153, 0)); // Orange background color
-        btnPersonal.setForeground(Color.WHITE); // White text color
+        btnPersonal.setBackground(Color.WHITE); 
+        btnPersonal.setForeground(new Color(102, 51, 0));
         btnPersonal.addActionListener(this);
         add(btnPersonal);
 
         btnWork.setBounds(450, 60, 100, 30);
         btnWork.setFont(new Font("Arial", Font.BOLD, 14));
-        btnWork.setBackground(new Color(255, 153, 0)); // Orange background color
-        btnWork.setForeground(Color.WHITE); // White text color
+        btnWork.setBackground(Color.WHITE); 
+        btnWork.setForeground(new Color(102, 51, 0));
         btnWork.addActionListener(this);
         add(btnWork);
 
