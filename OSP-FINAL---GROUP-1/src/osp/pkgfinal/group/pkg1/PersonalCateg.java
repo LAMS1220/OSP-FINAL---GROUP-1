@@ -19,7 +19,7 @@ public class PersonalCateg extends JFrame implements ActionListener {
     private static final String URL = "jdbc:mysql://localhost:3306/osp";
     private static final String USER = "lance";
     private static final String PASSWORD = "12345";
-    private static final String IMAGE_DIR = "images"; // Directory where images are stored
+    private static final String IMAGE_DIR = "images"; 
 
     public PersonalCateg() {
         setTitle("PERSONAL ITEMS CATEGORY");
@@ -27,12 +27,12 @@ public class PersonalCateg extends JFrame implements ActionListener {
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
-        getContentPane().setBackground(new Color(255, 204, 153)); // Setting background color similar to HomeCateg
+        getContentPane().setBackground(new Color(255, 204, 153)); 
 
         lblTitle = new JLabel("PERSONAL CATEGORY");
         lblTitle.setFont(new Font("Arial", Font.BOLD, 20));
         lblTitle.setBounds(280, 10, 250, 30);
-        lblTitle.setForeground(new Color(102, 51, 0)); // Darker shade for better contrast
+        lblTitle.setForeground(new Color(102, 51, 0)); 
         add(lblTitle);
 
         btnPayment = new JButton("PAYMENT");
@@ -75,10 +75,9 @@ public class PersonalCateg extends JFrame implements ActionListener {
         establishConnection();
 
         JPanel itemsPanel = new JPanel();
-        itemsPanel.setLayout(new GridLayout(0, 1, 0, 10)); // Adjusted to include vertical gap of 10 pixels
-        itemsPanel.setBounds(50, 100, 660, 400); // Adjusted position and size
+        itemsPanel.setLayout(new GridLayout(0, 1, 0, 10)); 
+        itemsPanel.setBounds(50, 100, 660, 400); 
 
-        // Add items with image file names
         addItem(itemsPanel, "PONDS Facial Wash", 3.10, "ponds.png");
         addItem(itemsPanel, "Dove Shampoo", 0.91, "dove.jfif");
         addItem(itemsPanel, "Creamsilk Conditioner", 1.75, "cm.jfif");
@@ -130,7 +129,6 @@ public class PersonalCateg extends JFrame implements ActionListener {
     }
 
     private void updateCart() {
-        // Implement if needed
     }
 
     private class ItemPanel extends JPanel implements ActionListener {
@@ -145,24 +143,24 @@ public class PersonalCateg extends JFrame implements ActionListener {
 
             setLayout(new BorderLayout());
 
-            JPanel textPanel = new JPanel(new FlowLayout(FlowLayout.LEFT)); // Panel for item name and price
+            JPanel textPanel = new JPanel(new FlowLayout(FlowLayout.LEFT)); 
             lblItemName = new JLabel(item.getName());
             lblItemPrice = new JLabel("$" + item.getPrice());
             textPanel.add(lblItemName);
             textPanel.add(lblItemPrice);
 
-            JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT)); // Panel for buttons
+            JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT)); 
             btnAddToCart = new JButton("Add to Cart");
-            btnSeeImage = new JButton("See Product Image"); // Initialize button for viewing product image
+            btnSeeImage = new JButton("See Product Image"); 
 
-            // Apply unified button style
+           
             btnAddToCart.setFont(new Font("Arial", Font.BOLD, 14));
-            btnAddToCart.setBackground(new Color(255, 153, 0)); // Orange background color
-            btnAddToCart.setForeground(Color.WHITE); // White text color
+            btnAddToCart.setBackground(new Color(255, 153, 0));
+            btnAddToCart.setForeground(Color.WHITE);
             btnAddToCart.addActionListener(this);
 
-            btnSeeImage.setFont(new Font("Arial", Font.PLAIN, 12)); // Adjusted font size for image button
-            btnSeeImage.setBackground(Color.LIGHT_GRAY); // Light gray background for contrast
+            btnSeeImage.setFont(new Font("Arial", Font.PLAIN, 12));
+            btnSeeImage.setBackground(Color.LIGHT_GRAY);
             btnSeeImage.addActionListener(this);
 
             buttonPanel.add(btnAddToCart);
@@ -182,7 +180,7 @@ public class PersonalCateg extends JFrame implements ActionListener {
         }
 
         private void addItemToCart(String itemName, double itemPrice) {
-            lstItems.add(new Item(itemName, itemPrice, item.getImageFileName()));
+            lstItems.add(new PersonalCateg.Item(itemName, itemPrice, item.getImageFileName()));
             totalPrice += itemPrice;
             updateCart();
 
@@ -194,35 +192,31 @@ public class PersonalCateg extends JFrame implements ActionListener {
                 try (ResultSet generatedKeys = insertItemStmt.getGeneratedKeys()) {
                     if (generatedKeys.next()) {
                         int itemId = generatedKeys.getInt(1);
-                        try (PreparedStatement insertPaymentStmt = conn.prepareStatement("INSERT INTO payments (item_id, customer_name, customer_address, customer_phone, payment_status) VALUES (?, ?, ?, ?, ?)")) {
+                        try (PreparedStatement insertPaymentStmt = conn.prepareStatement("INSERT INTO payment (item_id, price) VALUES (?, ?)")) {
                             insertPaymentStmt.setInt(1, itemId);
-                            insertPaymentStmt.setString(2, "Customer Name");
-                            insertPaymentStmt.setString(3, "Customer Address");
-                            insertPaymentStmt.setString(4, "Customer Phone");
-                            insertPaymentStmt.setString(5, "Pending");
+                            insertPaymentStmt.setDouble(2, itemPrice);
                             insertPaymentStmt.executeUpdate();
                         }
                     }
                 }
             } catch (SQLException ex) {
                 ex.printStackTrace();
-                JOptionPane.showMessageDialog(PersonalCateg.this, "Failed to add item to cart: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
-
+    
     private void showProductImage(String imageFileName) {
         JDialog imageDialog = new JDialog(PersonalCateg.this, "Product Image", true);
-        imageDialog.setSize(450, 450); // Set dialog size
+        imageDialog.setSize(450, 450); 
 
-        // Load the image using the file name
+        
         File imageFile = new File(IMAGE_DIR, imageFileName);
         if (imageFile.exists()) {
             ImageIcon imageIcon = new ImageIcon(imageFile.getPath());
-            Image image = imageIcon.getImage(); // Transform ImageIcon to Image
-            Image scaledImage = image.getScaledInstance(400, 400, Image.SCALE_SMOOTH); // Scale the image
+            Image image = imageIcon.getImage(); 
+            Image scaledImage = image.getScaledInstance(400, 400, Image.SCALE_SMOOTH); 
 
-            ImageIcon scaledImageIcon = new ImageIcon(scaledImage); // Transform Image back to ImageIcon
+            ImageIcon scaledImageIcon = new ImageIcon(scaledImage);
             JLabel lblImage = new JLabel(scaledImageIcon);
             imageDialog.add(lblImage, BorderLayout.CENTER);
         } else {

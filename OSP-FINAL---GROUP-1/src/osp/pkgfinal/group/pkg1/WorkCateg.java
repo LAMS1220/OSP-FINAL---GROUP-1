@@ -19,7 +19,7 @@ public class WorkCateg extends JFrame implements ActionListener {
     private static final String URL = "jdbc:mysql://localhost:3306/osp";
     private static final String USER = "lance";
     private static final String PASSWORD = "12345";
-    private static final String IMAGE_DIR = "images"; // Directory where images are stored
+    private static final String IMAGE_DIR = "images"; 
 
     public WorkCateg() {
         setTitle("WORK ITEMS CATEGORY");
@@ -27,12 +27,12 @@ public class WorkCateg extends JFrame implements ActionListener {
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
-        getContentPane().setBackground(new Color(255, 204, 153)); // Setting background color similar to PersonalCateg
+        getContentPane().setBackground(new Color(255, 204, 153)); 
 
         lblTitle = new JLabel("WORK CATEGORY");
         lblTitle.setFont(new Font("Arial", Font.BOLD, 20));
         lblTitle.setBounds(280, 10, 250, 30);
-        lblTitle.setForeground(new Color(102, 51, 0)); // Darker shade for better contrast
+        lblTitle.setForeground(new Color(102, 51, 0)); 
         add(lblTitle);
 
         btnPayment = new JButton("PAYMENT");
@@ -75,10 +75,10 @@ public class WorkCateg extends JFrame implements ActionListener {
         establishConnection();
 
         JPanel itemsPanel = new JPanel();
-        itemsPanel.setLayout(new GridLayout(0, 1, 0, 10)); // Adjusted to include vertical gap of 10 pixels
-        itemsPanel.setBounds(50, 100, 660, 400); // Adjusted position and size
+        itemsPanel.setLayout(new GridLayout(0, 1, 0, 10)); 
+        itemsPanel.setBounds(50, 100, 660, 400); 
 
-        // Add items with image file names
+        
         addItem(itemsPanel, "ACER Aspire 3", 1000.00, "acer.jpg");
         addItem(itemsPanel, "AKARI Office Lamp", 150.00, "lamp.jfif");
         addItem(itemsPanel, "Chair", 30.00, "chair.png");
@@ -130,7 +130,6 @@ public class WorkCateg extends JFrame implements ActionListener {
     }
 
     private void updateCart() {
-        // Implement if needed
     }
 
     private class ItemPanel extends JPanel implements ActionListener {
@@ -145,24 +144,24 @@ public class WorkCateg extends JFrame implements ActionListener {
 
             setLayout(new BorderLayout());
 
-            JPanel textPanel = new JPanel(new FlowLayout(FlowLayout.LEFT)); // Panel for item name and price
+            JPanel textPanel = new JPanel(new FlowLayout(FlowLayout.LEFT)); 
             lblItemName = new JLabel(item.getName());
             lblItemPrice = new JLabel("$" + item.getPrice());
             textPanel.add(lblItemName);
             textPanel.add(lblItemPrice);
 
-            JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT)); // Panel for buttons
+            JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT)); 
             btnAddToCart = new JButton("Add to Cart");
-            btnSeeImage = new JButton("See Product Image"); // Initialize button for viewing product image
+            btnSeeImage = new JButton("See Product Image"); 
 
-            // Apply unified button style
+            
             btnAddToCart.setFont(new Font("Arial", Font.BOLD, 14));
-            btnAddToCart.setBackground(new Color(255, 153, 0)); // Orange background color
-            btnAddToCart.setForeground(Color.WHITE); // White text color
+            btnAddToCart.setBackground(new Color(255, 153, 0)); 
+            btnAddToCart.setForeground(Color.WHITE); 
             btnAddToCart.addActionListener(this);
 
-            btnSeeImage.setFont(new Font("Arial", Font.PLAIN, 12)); // Adjusted font size for image button
-            btnSeeImage.setBackground(Color.LIGHT_GRAY); // Light gray background for contrast
+            btnSeeImage.setFont(new Font("Arial", Font.PLAIN, 12)); 
+            btnSeeImage.setBackground(Color.LIGHT_GRAY); 
             btnSeeImage.addActionListener(this);
 
             buttonPanel.add(btnAddToCart);
@@ -190,16 +189,18 @@ public class WorkCateg extends JFrame implements ActionListener {
                 insertItemStmt.setString(1, itemName);
                 insertItemStmt.setDouble(2, itemPrice);
                 insertItemStmt.executeUpdate();
-
-                try (ResultSet generatedKeys = insertItemStmt.getGeneratedKeys()) {
+              try (ResultSet generatedKeys = insertItemStmt.getGeneratedKeys()) {
                     if (generatedKeys.next()) {
                         int itemId = generatedKeys.getInt(1);
-                        try (PreparedStatement insertPaymentStmt = conn.prepareStatement("INSERT INTO payments (item_id, customer_name, customer_address, customer_phone, payment_status) VALUES (?, ?, ?, ?, ?)")) {
+                        try (PreparedStatement insertPaymentStmt = conn.prepareStatement("INSERT INTO payments (item_id, customer_name, customer_address, customer_phone, payment_status, amount, payment_method) VALUES (?, ?, ?, ?, ?, ?, ?)")) {
                             insertPaymentStmt.setInt(1, itemId);
                             insertPaymentStmt.setString(2, "Customer Name");
                             insertPaymentStmt.setString(3, "Customer Address");
                             insertPaymentStmt.setString(4, "Customer Phone");
                             insertPaymentStmt.setString(5, "Pending");
+                            insertPaymentStmt.setDouble(6, itemPrice);
+                            insertPaymentStmt.setString(7, "default_method");
+                            System.out.println("Executing query: " + insertPaymentStmt);
                             insertPaymentStmt.executeUpdate();
                         }
                     }
@@ -219,24 +220,24 @@ public class WorkCateg extends JFrame implements ActionListener {
                 ImageIcon originalIcon = new ImageIcon(imageFile.getPath());
                 Image originalImage = originalIcon.getImage();
 
-                // Define the maximum size of the dialog
+                
                 int maxWidth = 400;
                 int maxHeight = 400;
 
-                // Get original dimensions
+                
                 int originalWidth = originalIcon.getIconWidth();
                 int originalHeight = originalIcon.getIconHeight();
 
-                // Calculate the scaling factor to fit within the max dimensions
+                
                 double widthRatio = (double) maxWidth / originalWidth;
                 double heightRatio = (double) maxHeight / originalHeight;
                 double scalingFactor = Math.min(widthRatio, heightRatio);
 
-                // Calculate new dimensions
+                
                 int newWidth = (int) (originalWidth * scalingFactor);
                 int newHeight = (int) (originalHeight * scalingFactor);
 
-                // Resize the image
+                
                 Image scaledImage = originalImage.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
                 ImageIcon scaledIcon = new ImageIcon(scaledImage);
 
@@ -245,14 +246,14 @@ public class WorkCateg extends JFrame implements ActionListener {
                 lblImage.setVerticalAlignment(JLabel.CENTER);
                 imageDialog.add(lblImage, BorderLayout.CENTER);
 
-                // Set the dialog size to fit the image plus some padding
+                
                 imageDialog.setSize(newWidth + 50, newHeight + 50);
             } else {
                 JLabel lblImage = new JLabel("Image not found");
                 lblImage.setHorizontalAlignment(JLabel.CENTER);
                 lblImage.setVerticalAlignment(JLabel.CENTER);
                 imageDialog.add(lblImage, BorderLayout.CENTER);
-                imageDialog.setSize(300, 300); // Set a default size if image not found
+                imageDialog.setSize(300, 300); 
             }
 
             JButton btnClose = new JButton("Close");

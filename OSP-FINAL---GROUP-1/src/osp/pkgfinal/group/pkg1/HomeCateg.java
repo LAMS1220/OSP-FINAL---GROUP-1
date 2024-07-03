@@ -19,7 +19,7 @@ public class HomeCateg extends JFrame implements ActionListener {
     private static final String URL = "jdbc:mysql://localhost:3306/osp";
     private static final String USER = "lance";
     private static final String PASSWORD = "12345";
-    private static final String IMAGE_DIR = "images"; // Directory where images are stored
+    private static final String IMAGE_DIR = "images"; 
 
     public HomeCateg() {
         setTitle("HOME ITEMS CATEGORY");
@@ -32,7 +32,7 @@ public class HomeCateg extends JFrame implements ActionListener {
         lblTitle = new JLabel("HOME CATEGORY");
         lblTitle.setFont(new Font("Arial", Font.BOLD, 20));
         lblTitle.setBounds(280, 10, 200, 30);
-        lblTitle.setForeground(new Color(102, 51, 0)); // Darker shade for better contrast
+        lblTitle.setForeground(new Color(102, 51, 0));
         add(lblTitle);
 
         btnPayment = new JButton("PAYMENT");
@@ -75,8 +75,8 @@ public class HomeCateg extends JFrame implements ActionListener {
         establishConnection();
 
         JPanel itemsPanel = new JPanel();
-        itemsPanel.setLayout(new GridLayout(0, 1, 0, 10)); // Adjusted to include vertical gap of 10 pixels
-        itemsPanel.setBounds(50, 100, 660, 400); // Adjusted position and size
+        itemsPanel.setLayout(new GridLayout(0, 1, 0, 10)); 
+        itemsPanel.setBounds(50, 100, 660, 400); 
 
         addItem(itemsPanel, "Stainless Steel Utensils Set", 50.00, "utensils.png");
         addItem(itemsPanel, "OMNI 5m Extension", 5.35, "omni.png");
@@ -144,24 +144,24 @@ public class HomeCateg extends JFrame implements ActionListener {
 
             setLayout(new BorderLayout());
 
-            JPanel textPanel = new JPanel(new FlowLayout(FlowLayout.LEFT)); // Panel for item name and price
+            JPanel textPanel = new JPanel(new FlowLayout(FlowLayout.LEFT)); 
             lblItemName = new JLabel(item.getName());
             lblItemPrice = new JLabel("$" + item.getPrice());
             textPanel.add(lblItemName);
             textPanel.add(lblItemPrice);
 
-            JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT)); // Panel for buttons
+            JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT)); 
             btnAddToCart = new JButton("Add to Cart");
-            btnSeeImage = new JButton("See Product Image"); // Initialize button for viewing product image
+            btnSeeImage = new JButton("See Product Image"); 
 
             // Apply unified button style
             btnAddToCart.setFont(new Font("Arial", Font.BOLD, 14));
-            btnAddToCart.setBackground(new Color(255, 153, 0)); // Orange background color
-            btnAddToCart.setForeground(Color.WHITE); // White text color
+            btnAddToCart.setBackground(new Color(255, 153, 0)); 
+            btnAddToCart.setForeground(Color.WHITE); 
             btnAddToCart.addActionListener(this);
 
-            btnSeeImage.setFont(new Font("Arial", Font.PLAIN, 12)); // Adjusted font size for image button
-            btnSeeImage.setBackground(Color.LIGHT_GRAY); // Light gray background for contrast
+            btnSeeImage.setFont(new Font("Arial", Font.PLAIN, 12)); 
+            btnSeeImage.setBackground(Color.LIGHT_GRAY);
             btnSeeImage.addActionListener(this);
 
             buttonPanel.add(btnAddToCart);
@@ -224,7 +224,7 @@ public class HomeCateg extends JFrame implements ActionListener {
         btnClose.addActionListener(e -> imageDialog.dispose());
         imageDialog.add(btnClose, BorderLayout.SOUTH);
 
-        imageDialog.setLocationRelativeTo(this); // Centers the dialog relative to HomeCateg frame
+        imageDialog.setLocationRelativeTo(this); 
         imageDialog.setVisible(true);
     }
 

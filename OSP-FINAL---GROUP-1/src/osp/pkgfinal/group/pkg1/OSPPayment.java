@@ -35,14 +35,14 @@ public class OSPPayment extends JFrame implements ActionListener {
         setTitle("PAYMENT");
         setSize(600, 700);
         setLayout(new BorderLayout());
-        getContentPane().setBackground(new Color(255, 204, 153)); // Set background color
+        getContentPane().setBackground(new Color(255, 204, 153)); 
 
         initializeDBConnection();
 
         customerPanel = new JPanel();
         customerPanel.setLayout(null);
         customerPanel.setPreferredSize(new Dimension(600, 300));
-        customerPanel.setBackground(new Color(255, 204, 153)); // Set background color
+        customerPanel.setBackground(new Color(255, 204, 153)); 
 
         lblcustomer = new JLabel("CUSTOMER'S INFORMATION");
         lblcustomer.setBounds(20, 20, 250, 30);
@@ -105,7 +105,7 @@ public class OSPPayment extends JFrame implements ActionListener {
 
         itemsPanel = new JPanel();
         itemsPanel.setLayout(new BorderLayout());
-        itemsPanel.setBackground(new Color(255, 204, 153)); // Set background color
+        itemsPanel.setBackground(new Color(255, 204, 153)); 
 
         lblSelectedItems = new JLabel("SELECTED ITEMS");
         lblSelectedItems.setFont(new Font("Georgia", Font.BOLD, 16));
@@ -136,7 +136,7 @@ public class OSPPayment extends JFrame implements ActionListener {
         buttonPanel = new JPanel();
         buttonPanel.setLayout(new BorderLayout());
         buttonPanel.setPreferredSize(new Dimension(600, 50));
-        buttonPanel.setBackground(new Color(255, 204, 153)); // Set background color
+        buttonPanel.setBackground(new Color(255, 204, 153)); 
 
         btnHome = new JButton("HOME");
         btnHome.setPreferredSize(new Dimension(100, 30));

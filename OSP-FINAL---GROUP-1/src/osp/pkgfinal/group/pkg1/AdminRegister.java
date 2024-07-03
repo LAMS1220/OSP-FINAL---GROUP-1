@@ -24,18 +24,18 @@ public class AdminRegister extends JFrame implements ActionListener {
 
         lblTitle = new JLabel("ADMIN REGISTRATION");
         lblTitle.setBounds(75, 20, 250, 30);
-        lblTitle.setFont(new Font("Georgia", Font.BOLD, 19)); // Using a bold font with a similar style
-        lblTitle.setForeground(new Color(102, 51, 0)); // Darker shade for better contrast
+        lblTitle.setFont(new Font("Georgia", Font.BOLD, 19)); 
+        lblTitle.setForeground(new Color(102, 51, 0));
        
         lblUsername = new JLabel("Username:");
         lblUsername.setBounds(50, 80, 100, 25);
         lblUsername.setFont(new Font("Arial", Font.BOLD, 14));
-        lblUsername.setForeground(new Color(102, 51, 0)); // Darker shade for better contrast
+        lblUsername.setForeground(new Color(102, 51, 0)); 
 
         lblPassword = new JLabel("Password:");
         lblPassword.setBounds(50, 120, 100, 25);
         lblPassword.setFont(new Font("Arial", Font.BOLD, 14));
-        lblPassword.setForeground(new Color(102, 51, 0)); // Darker shade for better contrast
+        lblPassword.setForeground(new Color(102, 51, 0)); 
 
         txtfldUsername = new JTextField();
         txtfldUsername.setBounds(150, 80, 180, 25);
