@@ -30,7 +30,7 @@ public class HomeCateg extends JFrame implements ActionListener {
         getContentPane().setBackground(new Color(255, 204, 153));   
 
         imglogo = new JLabel();
-        imglogo.setIcon(new ImageIcon(new ImageIcon("C:\\Users\\noctafly\\Desktop\\baguaa\\New Folder\\aad\\OSP-FINAL---GROUP-1\\OSP-FINAL---GROUP-1\\images\\logo.png").getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH)));
+        imglogo.setIcon(new ImageIcon(new ImageIcon("C:\\Users\\Lanzdrei Salas\\Documents\\NetBeansProjects\\New Folder\\OSP-FINAL---GROUP-11\\OSP-FINAL---GROUP-1\\src\\osp\\pkgfinal\\group\\pkg1\\logo.png").getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH)));
         imglogo.setBounds(10, 7, 50, 50);
         add(imglogo);
         
@@ -196,7 +196,7 @@ public class HomeCateg extends JFrame implements ActionListener {
                 try (ResultSet generatedKeys = insertItemStmt.getGeneratedKeys()) {
                     if (generatedKeys.next()) {
                         int itemId = generatedKeys.getInt(1);
-                        try (PreparedStatement insertPaymentStmt = conn.prepareStatement("INSERT INTO payment (item_id, price) VALUES (?, ?)")) {
+                        try (PreparedStatement insertPaymentStmt = conn.prepareStatement("INSERT INTO payments (item_id, price) VALUES (?, ?)")) {
                             insertPaymentStmt.setInt(1, itemId);
                             insertPaymentStmt.setDouble(2, itemPrice);
                             insertPaymentStmt.executeUpdate();

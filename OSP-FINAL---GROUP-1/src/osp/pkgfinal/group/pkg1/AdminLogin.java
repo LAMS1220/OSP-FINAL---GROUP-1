@@ -66,7 +66,7 @@ public class AdminLogin extends JFrame implements ActionListener {
         add(btnLogin);
         add(btnBack);
 
-        setSize(380, 300);
+        setSize(800,800);
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);

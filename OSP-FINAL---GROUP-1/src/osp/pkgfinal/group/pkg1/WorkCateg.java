@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WorkCateg extends JFrame implements ActionListener {
+
     private JButton btnHome, btnPersonal, btnWork, btnPayment;
     private JLabel lblTitle, imglogo;
     private List<ItemPanel> pnlItems;
@@ -19,7 +20,7 @@ public class WorkCateg extends JFrame implements ActionListener {
     private static final String URL = "jdbc:mysql://localhost:3306/osp";
     private static final String USER = "lance";
     private static final String PASSWORD = "12345";
-    private static final String IMAGE_DIR = "images"; 
+    private static final String IMAGE_DIR = "images";
 
     public WorkCateg() {
         setTitle("WORK ITEMS CATEGORY");
@@ -27,23 +28,23 @@ public class WorkCateg extends JFrame implements ActionListener {
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
-        getContentPane().setBackground(new Color(255, 204, 153)); 
+        getContentPane().setBackground(new Color(255, 204, 153));
 
         imglogo = new JLabel();
-        imglogo.setIcon(new ImageIcon(new ImageIcon("C:\\Users\\noctafly\\Desktop\\baguaa\\New Folder\\aad\\OSP-FINAL---GROUP-1\\OSP-FINAL---GROUP-1\\images\\logo.png").getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH)));
+        imglogo.setIcon(new ImageIcon(new ImageIcon("C:\\Users\\Lanzdrei Salas\\Documents\\NetBeansProjects\\New Folder\\OSP-FINAL---GROUP-11\\OSP-FINAL---GROUP-1\\src\\osp\\pkgfinal\\group\\pkg1\\logo.png").getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH)));
         imglogo.setBounds(10, 7, 50, 50);
         add(imglogo);
-        
+
         lblTitle = new JLabel("WORK CATEGORY");
         lblTitle.setFont(new Font("Arial", Font.BOLD, 20));
         lblTitle.setBounds(280, 10, 250, 30);
-        lblTitle.setForeground(new Color(102, 51, 0)); 
+        lblTitle.setForeground(new Color(102, 51, 0));
         add(lblTitle);
 
         btnPayment = new JButton("PAYMENT");
         btnPayment.setBounds(660, 10, 110, 30);
         btnPayment.setFont(new Font("Arial", Font.BOLD, 14));
-        btnPayment.setBackground(Color.WHITE); 
+        btnPayment.setBackground(Color.WHITE);
         btnPayment.setForeground(new Color(102, 51, 0));
         btnPayment.addActionListener(this);
         add(btnPayment);
@@ -54,21 +55,21 @@ public class WorkCateg extends JFrame implements ActionListener {
 
         btnHome.setBounds(150, 60, 100, 30);
         btnHome.setFont(new Font("Arial", Font.BOLD, 14));
-        btnHome.setBackground(Color.WHITE); 
+        btnHome.setBackground(Color.WHITE);
         btnHome.setForeground(new Color(102, 51, 0));
         btnHome.addActionListener(this);
         add(btnHome);
 
         btnPersonal.setBounds(300, 60, 110, 30);
         btnPersonal.setFont(new Font("Arial", Font.BOLD, 14));
-        btnPersonal.setBackground(Color.WHITE); 
+        btnPersonal.setBackground(Color.WHITE);
         btnPersonal.setForeground(new Color(102, 51, 0));
         btnPersonal.addActionListener(this);
         add(btnPersonal);
 
         btnWork.setBounds(450, 60, 100, 30);
         btnWork.setFont(new Font("Arial", Font.BOLD, 14));
-        btnWork.setBackground(Color.WHITE); 
+        btnWork.setBackground(Color.WHITE);
         btnWork.setForeground(new Color(102, 51, 0));
         btnWork.addActionListener(this);
         add(btnWork);
@@ -80,10 +81,9 @@ public class WorkCateg extends JFrame implements ActionListener {
         establishConnection();
 
         JPanel itemsPanel = new JPanel();
-        itemsPanel.setLayout(new GridLayout(0, 1, 0, 10)); 
-        itemsPanel.setBounds(50, 100, 660, 400); 
+        itemsPanel.setLayout(new GridLayout(0, 1, 0, 10));
+        itemsPanel.setBounds(50, 100, 660, 400);
 
-        
         addItem(itemsPanel, "ACER Aspire 3", 1000.00, "acer.jpg");
         addItem(itemsPanel, "AKARI Office Lamp", 150.00, "lamp.jfif");
         addItem(itemsPanel, "Chair", 30.00, "chair.png");
@@ -138,6 +138,7 @@ public class WorkCateg extends JFrame implements ActionListener {
     }
 
     private class ItemPanel extends JPanel implements ActionListener {
+
         private JLabel lblItemName;
         private JLabel lblItemPrice;
         private JButton btnAddToCart;
@@ -149,24 +150,23 @@ public class WorkCateg extends JFrame implements ActionListener {
 
             setLayout(new BorderLayout());
 
-            JPanel textPanel = new JPanel(new FlowLayout(FlowLayout.LEFT)); 
+            JPanel textPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
             lblItemName = new JLabel(item.getName());
             lblItemPrice = new JLabel("$" + item.getPrice());
             textPanel.add(lblItemName);
             textPanel.add(lblItemPrice);
 
-            JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT)); 
+            JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
             btnAddToCart = new JButton("Add to Cart");
-            btnSeeImage = new JButton("See Product Image"); 
+            btnSeeImage = new JButton("See Product Image");
 
-            
             btnAddToCart.setFont(new Font("Arial", Font.BOLD, 14));
-            btnAddToCart.setBackground(new Color(255, 153, 0)); 
-            btnAddToCart.setForeground(Color.WHITE); 
+            btnAddToCart.setBackground(new Color(255, 153, 0));
+            btnAddToCart.setForeground(Color.WHITE);
             btnAddToCart.addActionListener(this);
 
-            btnSeeImage.setFont(new Font("Arial", Font.PLAIN, 12)); 
-            btnSeeImage.setBackground(Color.LIGHT_GRAY); 
+            btnSeeImage.setFont(new Font("Arial", Font.PLAIN, 12));
+            btnSeeImage.setBackground(Color.LIGHT_GRAY);
             btnSeeImage.addActionListener(this);
 
             buttonPanel.add(btnAddToCart);
@@ -194,7 +194,7 @@ public class WorkCateg extends JFrame implements ActionListener {
                 insertItemStmt.setString(1, itemName);
                 insertItemStmt.setDouble(2, itemPrice);
                 insertItemStmt.executeUpdate();
-              try (ResultSet generatedKeys = insertItemStmt.getGeneratedKeys()) {
+                try (ResultSet generatedKeys = insertItemStmt.getGeneratedKeys()) {
                     if (generatedKeys.next()) {
                         int itemId = generatedKeys.getInt(1);
                         try (PreparedStatement insertPaymentStmt = conn.prepareStatement("INSERT INTO payments (item_id, customer_name, customer_address, customer_phone, payment_status, amount, payment_method) VALUES (?, ?, ?, ?, ?, ?, ?)")) {
@@ -219,30 +219,25 @@ public class WorkCateg extends JFrame implements ActionListener {
         private void showProductImage(String imageFileName) {
             JDialog imageDialog = new JDialog(WorkCateg.this, "Product Image", true);
             imageDialog.setLayout(new BorderLayout());
-            
+
             File imageFile = new File(IMAGE_DIR, imageFileName);
             if (imageFile.exists()) {
                 ImageIcon originalIcon = new ImageIcon(imageFile.getPath());
                 Image originalImage = originalIcon.getImage();
 
-                
                 int maxWidth = 400;
                 int maxHeight = 400;
 
-                
                 int originalWidth = originalIcon.getIconWidth();
                 int originalHeight = originalIcon.getIconHeight();
 
-                
                 double widthRatio = (double) maxWidth / originalWidth;
                 double heightRatio = (double) maxHeight / originalHeight;
                 double scalingFactor = Math.min(widthRatio, heightRatio);
 
-                
                 int newWidth = (int) (originalWidth * scalingFactor);
                 int newHeight = (int) (originalHeight * scalingFactor);
 
-                
                 Image scaledImage = originalImage.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
                 ImageIcon scaledIcon = new ImageIcon(scaledImage);
 
@@ -251,14 +246,13 @@ public class WorkCateg extends JFrame implements ActionListener {
                 lblImage.setVerticalAlignment(JLabel.CENTER);
                 imageDialog.add(lblImage, BorderLayout.CENTER);
 
-                
                 imageDialog.setSize(newWidth + 50, newHeight + 50);
             } else {
                 JLabel lblImage = new JLabel("Image not found");
                 lblImage.setHorizontalAlignment(JLabel.CENTER);
                 lblImage.setVerticalAlignment(JLabel.CENTER);
                 imageDialog.add(lblImage, BorderLayout.CENTER);
-                imageDialog.setSize(300, 300); 
+                imageDialog.setSize(300, 300);
             }
 
             JButton btnClose = new JButton("Close");
@@ -271,6 +265,7 @@ public class WorkCateg extends JFrame implements ActionListener {
     }
 
     private class Item {
+
         private String name;
         private double price;
         private String imageFileName;
