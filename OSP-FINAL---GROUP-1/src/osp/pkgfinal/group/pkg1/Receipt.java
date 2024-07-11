@@ -11,6 +11,7 @@ public class Receipt extends JFrame {
     public Receipt(String name, String address, String contact, String paymentMethod, List<String> items, double totalPrice) {
         setTitle("Receipt");
         setSize(400, 500);
+        setLocationRelativeTo(null);
         setLayout(new BorderLayout());
 
         receiptArea = new JTextArea();

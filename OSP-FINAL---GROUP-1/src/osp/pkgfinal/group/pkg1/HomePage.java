@@ -11,62 +11,73 @@ public class HomePage extends JFrame implements ActionListener {
 
     public HomePage() {
         setTitle("Main Menu");
-        setSize(600, 300);
+        setSize(800, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
         setLayout(null);
+        setLocationRelativeTo(null);
         getContentPane().setBackground(new Color(255, 204, 153));
 
         imglogo = new JLabel();
         imglogo.setIcon(new ImageIcon(new ImageIcon("C:\\Users\\Lanzdrei Salas\\Documents\\NetBeansProjects\\New Folder\\OSP-FINAL---GROUP-11\\OSP-FINAL---GROUP-1\\src\\osp\\pkgfinal\\group\\pkg1\\logo.png").getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH)));
-        imglogo.setBounds(35, 20, 50, 50);
         add(imglogo);
-        
+
         title = new JLabel("Welcome to Our Online Shopping Platform");
         title.setFont(new Font("Georgia", Font.BOLD, 20));
-        title.setBounds(95, 30, 500, 30);
         title.setForeground(new Color(102, 51, 0));
         add(title);
 
-        
         btnHome = new JButton("Home Items");
-        btnHome.setBounds(80, 100, 120, 40); 
         btnHome.setFont(new Font("Arial", Font.BOLD, 14));
-        btnHome.setBackground(Color.WHITE); 
+        btnHome.setBackground(Color.WHITE);
         btnHome.setForeground(new Color(102, 51, 0));
         add(btnHome);
 
-        
         btnPersonal = new JButton("Personal Items");
-        btnPersonal.setBounds(230, 100, 140, 40); 
         btnPersonal.setFont(new Font("Arial", Font.BOLD, 14));
-        btnPersonal.setBackground(Color.WHITE); 
+        btnPersonal.setBackground(Color.WHITE);
         btnPersonal.setForeground(new Color(102, 51, 0));
         add(btnPersonal);
 
-        
         btnWork = new JButton("Work Items");
-        btnWork.setBounds(400, 100, 120, 40); 
         btnWork.setFont(new Font("Arial", Font.BOLD, 14));
-        btnWork.setBackground(Color.WHITE); 
+        btnWork.setBackground(Color.WHITE);
         btnWork.setForeground(new Color(102, 51, 0));
         add(btnWork);
 
-        
         btnBack = new JButton("Return");
-        btnBack.setBounds(440, 180, 100, 30); 
         btnBack.setFont(new Font("Arial", Font.BOLD, 14));
-        btnBack.setBackground(Color.WHITE); 
+        btnBack.setBackground(Color.WHITE);
         btnBack.setForeground(new Color(102, 51, 0));
         add(btnBack);
 
-      
         btnHome.addActionListener(this);
         btnPersonal.addActionListener(this);
         btnWork.addActionListener(this);
         btnBack.addActionListener(this);
 
+        setComponentBounds();
+
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            @Override
+            public void componentResized(java.awt.event.ComponentEvent e) {
+                setComponentBounds();
+            }
+        });
+
         setVisible(true);
+    }
+
+    private void setComponentBounds() {
+        int frameWidth = getWidth();
+        int frameHeight = getHeight();
+
+        imglogo.setBounds((frameWidth - 50) / 2 - 310, (frameHeight - 50) / 2 - 170, 50, 50);
+        title.setBounds((frameWidth - 470) / 2, (frameHeight - 30) / 2 - 160, 500, 30);
+        btnHome.setBounds((frameWidth - 120) / 2 - 200, (frameHeight - 40) / 2 - 70, 120, 40);
+        btnPersonal.setBounds((frameWidth - 140) / 2, (frameHeight - 40) / 2 - 70, 140, 40);
+        btnWork.setBounds((frameWidth - 120) / 2 + 200, (frameHeight - 40) / 2 - 70, 120, 40);
+        btnBack.setBounds((frameWidth - 100) / 2 + 220, (frameHeight - 30) / 2 - 0, 100, 30);
     }
 
     @Override

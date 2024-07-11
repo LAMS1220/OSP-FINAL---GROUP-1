@@ -2,7 +2,6 @@ package osp.pkgfinal.group.pkg1;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,11 +19,20 @@ public class Dashboard extends JFrame implements ActionListener {
     public Dashboard() {
         setTitle("Dashboard");
         setSize(800, 600);
-        setLayout(new BorderLayout());
+        setLocationRelativeTo(null);
+        setLayout(null);
+        getContentPane().setBackground(new Color(255, 204, 153));
 
         initializeDBConnection();
         initializeUIComponents();
         loadDataFromDatabase();
+
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            @Override
+            public void componentResized(java.awt.event.ComponentEvent e) {
+                setComponentBounds();
+            }
+        });
 
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -50,25 +58,49 @@ public class Dashboard extends JFrame implements ActionListener {
             }
         };
         table = new JTable(tableModel);
-
         JScrollPane scrollPane = new JScrollPane(table);
+        add(scrollPane);
 
         btnDelete = new JButton("Delete");
+        btnDelete.setFont(new Font("Arial", Font.BOLD, 14));
+        btnDelete.setBackground(Color.WHITE);
+        btnDelete.setForeground(new Color(102, 51, 0));
         btnDelete.addActionListener(this);
+        add(btnDelete);
 
         btnEdit = new JButton("Edit");
+        btnEdit.setFont(new Font("Arial", Font.BOLD, 14));
+        btnEdit.setBackground(Color.WHITE);
+        btnEdit.setForeground(new Color(102, 51, 0));
         btnEdit.addActionListener(this);
+        add(btnEdit);
 
         btnBack = new JButton("Back");
+        btnBack.setFont(new Font("Arial", Font.BOLD, 14));
+        btnBack.setBackground(Color.WHITE);
+        btnBack.setForeground(new Color(102, 51, 0));
         btnBack.addActionListener(this);
+        add(btnBack);
 
-        JPanel buttonPanel = new JPanel();
-        buttonPanel.add(btnDelete);
-        buttonPanel.add(btnEdit);
-        buttonPanel.add(btnBack);
+        setComponentBounds();
+    }
 
-        add(scrollPane, BorderLayout.CENTER);
-        add(buttonPanel, BorderLayout.SOUTH);
+    private void setComponentBounds() {
+        int frameWidth = getWidth();
+        int frameHeight = getHeight();
+        int buttonHeight = 30;
+        int buttonWidth = 100;
+        int buttonSpacing = 20;
+
+        JScrollPane scrollPane = (JScrollPane) getContentPane().getComponent(0);
+        scrollPane.setBounds(20, 20, frameWidth - 40, frameHeight - 100);
+
+        int buttonPanelY = frameHeight - buttonHeight - 30;
+        int buttonPanelX = (frameWidth - (3 * buttonWidth + 2 * buttonSpacing)) / 2;
+
+        btnDelete.setBounds(buttonPanelX, buttonPanelY, buttonWidth, buttonHeight);
+        btnEdit.setBounds(buttonPanelX + buttonWidth + buttonSpacing, buttonPanelY, buttonWidth, buttonHeight);
+        btnBack.setBounds(buttonPanelX + 2 * (buttonWidth + buttonSpacing), buttonPanelY, buttonWidth, buttonHeight);
     }
 
     private void loadDataFromDatabase() {

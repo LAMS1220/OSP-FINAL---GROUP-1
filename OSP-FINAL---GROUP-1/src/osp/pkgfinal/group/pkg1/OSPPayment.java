@@ -33,8 +33,9 @@ public class OSPPayment extends JFrame implements ActionListener {
         this.totalPrice = totalPrice;
 
         setTitle("PAYMENT");
-        setSize(600, 700);
+        setSize(800, 600);
         setLayout(new BorderLayout());
+        setLocationRelativeTo(null);
         getContentPane().setBackground(new Color(255, 204, 153)); 
 
         imglogo = new JLabel();
@@ -54,36 +55,36 @@ public class OSPPayment extends JFrame implements ActionListener {
         lblcustomer.setFont(new Font("Georgia", Font.BOLD, 16));
 
         lblname = new JLabel("Name:");
-        lblname.setBounds(100, 70, 100, 30);
+        lblname.setBounds(200, 70, 100, 30);
         lblname.setFont(new Font("Arial", Font.BOLD, 15));
 
         lbladd = new JLabel("Address:");
-        lbladd.setBounds(100, 110, 100, 30);
+        lbladd.setBounds(200, 110, 100, 30);
         lbladd.setFont(new Font("Arial", Font.BOLD, 15));
 
         lblcontact = new JLabel("Contact No:");
-        lblcontact.setBounds(100, 150, 100, 30);
+        lblcontact.setBounds(200, 150, 100, 30);
         lblcontact.setFont(new Font("Arial", Font.BOLD, 15));
 
         lblmop = new JLabel("Mode of Payment:");
-        lblmop.setBounds(100, 190, 150, 30);
+        lblmop.setBounds(200, 190, 150, 30);
         lblmop.setFont(new Font("Arial", Font.BOLD, 15));
 
         txtname = new JTextField();
-        txtname.setBounds(250, 70, 200, 30);
+        txtname.setBounds(350, 70, 200, 30);
         txtname.setFont(new Font("Arial", Font.PLAIN, 15));
 
         txtadd = new JTextField();
-        txtadd.setBounds(250, 110, 200, 30);
+        txtadd.setBounds(350, 110, 200, 30);
         txtadd.setFont(new Font("Arial", Font.PLAIN, 15));
 
         txtcontact = new JTextField();
-        txtcontact.setBounds(250, 150, 200, 30);
+        txtcontact.setBounds(350, 150, 200, 30);
         txtcontact.setFont(new Font("Arial", Font.PLAIN, 15));
 
         String[] paymentMethods = {"Cash on Delivery", "GCash", "Paymaya"};
         cmbmop = new JComboBox<>(paymentMethods);
-        cmbmop.setBounds(250, 190, 200, 30);
+        cmbmop.setBounds(350, 190, 200, 30);
         cmbmop.setFont(new Font("Arial", Font.PLAIN, 15));
         cmbmop.setBackground(Color.WHITE); 
         cmbmop.setForeground(new Color(102, 51, 0));

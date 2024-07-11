@@ -2,63 +2,80 @@ package osp.pkgfinal.group.pkg1;
 
 import java.awt.*;
 import java.awt.EventQueue;
-import java.awt.Font;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Menu extends JFrame implements ActionListener {
-    
-    private JLabel lblTitle, lblSignUp, imglogo;                                                                                                                                                                                                                                                                                             
-    private JButton btnRegister, btnAdmin, btncus; 
-    
+
+    private JLabel lblTitle, lblSignUp, imglogo;
+    private JButton btnRegister, btnAdmin, btncus;
+
     public Menu() {
-        setSize(500, 350);
+        setSize(800, 600);
         setTitle("Admin Portal");
+        setLocationRelativeTo(null);
         getContentPane().setBackground(new Color(255, 204, 153));
-        
+
+        setLayout(null);
+        setResizable(false);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
         imglogo = new JLabel();
         imglogo.setIcon(new ImageIcon(new ImageIcon("C:\\Users\\Lanzdrei Salas\\Documents\\NetBeansProjects\\New Folder\\OSP-FINAL---GROUP-11\\OSP-FINAL---GROUP-1\\src\\osp\\pkgfinal\\group\\pkg1\\logo.png").getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH)));
-        imglogo.setBounds(40, 55, 50, 50);
         add(imglogo);
 
         lblTitle = new JLabel("ONLINE SHOPPING PLATFORM");
         lblTitle.setFont(new Font("Georgia", Font.BOLD, 20));
-        
+        add(lblTitle);
+
         lblSignUp = new JLabel("Register as Administrator");
         lblSignUp.setFont(new Font("Bell MT", Font.PLAIN, 14));
+        add(lblSignUp);
 
         btnRegister = new JButton("SIGN UP");
-        btnRegister.setBackground(Color.WHITE); 
+        btnRegister.setBackground(Color.WHITE);
         btnRegister.setForeground(new Color(102, 51, 0));
-        btnAdmin = new JButton("ADMIN");
-        btnAdmin.setBackground(Color.WHITE); 
-        btnAdmin.setForeground(new Color(102, 51, 0));
-        btncus = new JButton ("CUSTOMER");
-        btncus.setBackground(Color.WHITE); 
-        btncus.setForeground(new Color(102, 51, 0));
-        
-        add(lblTitle);
         add(btnRegister);
+
+        btnAdmin = new JButton("ADMIN");
+        btnAdmin.setBackground(Color.WHITE);
+        btnAdmin.setForeground(new Color(102, 51, 0));
         add(btnAdmin);
+
+        btncus = new JButton("CUSTOMER");
+        btncus.setBackground(Color.WHITE);
+        btncus.setForeground(new Color(102, 51, 0));
         add(btncus);
-        add(lblSignUp);
-        
-        lblTitle.setBounds(100, 40, 350, 80);
-        lblSignUp.setBounds(200, 250, 250, 20);
-        btnRegister.setBounds(360, 250, 100, 20);
-        btnAdmin.setBounds(80, 150, 150, 30);
-        btncus.setBounds(270, 150, 150, 30);
-        
+
         btnRegister.addActionListener(this);
         btnAdmin.addActionListener(this);
         btncus.addActionListener(this);
-        
-        setLayout(null);
-        setResizable(false);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        // Set initial bounds
+        setComponentBounds();
+
+        // Add a component listener to adjust component sizes when the frame is resized
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            @Override
+            public void componentResized(java.awt.event.ComponentEvent e) {
+                setComponentBounds();
+            }
+        });
     }
-    
+
+    private void setComponentBounds() {
+        int frameWidth = getWidth();
+        int frameHeight = getHeight();
+
+        imglogo.setBounds((frameWidth - 50) / 2 - 30, (frameHeight - 50) / 2 - 210, 50, 50);
+        lblTitle.setBounds((frameWidth - 350) / 2, (frameHeight - 80) / 2 - 90, 350, 80);
+        lblSignUp.setBounds((frameWidth - 250) / 2 - 50, (frameHeight - 20) / 2 + 50, 250, 20);
+        btnRegister.setBounds((frameWidth - 100) / 2 + 150, (frameHeight - 20) / 2 + 50, 100, 20);
+        btnAdmin.setBounds((frameWidth - 150) / 2 - 100, (frameHeight - 30) / 2 - 10, 150, 30);
+        btncus.setBounds((frameWidth - 150) / 2 + 100, (frameHeight - 30) / 2 - 10, 150, 30);
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == btnRegister) {
@@ -71,15 +88,14 @@ public class Menu extends JFrame implements ActionListener {
             AdminLogin adminLogin = new AdminLogin();
             adminLogin.setVisible(true);
             dispose();
-        }
-        else if (e.getSource() == btncus) {
+        } else if (e.getSource() == btncus) {
             JOptionPane.showMessageDialog(this, "Welcome Customer!", "SHOPPING", JOptionPane.INFORMATION_MESSAGE);
             HomePage home = new HomePage();
             home.setVisible(true);
             dispose();
         }
     }
-    
+
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             @Override

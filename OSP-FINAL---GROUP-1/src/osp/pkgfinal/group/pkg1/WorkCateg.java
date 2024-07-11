@@ -28,6 +28,7 @@ public class WorkCateg extends JFrame implements ActionListener {
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
+        setLocationRelativeTo(null);
         getContentPane().setBackground(new Color(255, 204, 153));
 
         imglogo = new JLabel();

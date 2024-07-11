@@ -17,47 +17,53 @@ public class AdminLogin extends JFrame implements ActionListener {
         initializeDBConnection();
 
         setTitle("Admin Login");
-        setLayout(null);       
+        setLayout(null); 
+        setLocationRelativeTo(null);
+        setTitle("Admin Login");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(800, 600);
+        setLocationRelativeTo(null);
+        setResizable(true);
         getContentPane().setBackground(new Color(255, 204, 153));
         
         
         lblTitle = new JLabel("ADMIN LOGIN");
         lblTitle.setFont(new Font("Georgia", Font.BOLD, 24));
-        lblTitle.setBounds(90, 20, 250, 30);
+        lblTitle.setBounds(300, 130, 250, 30);
         lblTitle.setForeground(new Color(102, 51, 0));
 
         lblUsername = new JLabel("Username:");
-        lblUsername.setBounds(50, 80, 100, 25);
+        lblUsername.setBounds(250, 200, 100, 25);
         lblUsername.setFont(new Font("Arial", Font.BOLD, 15));
         lblUsername.setForeground(new Color(102, 51, 0));
 
         lblPassword = new JLabel("Password:");
-        lblPassword.setBounds(50, 120, 100, 25);
+        lblPassword.setBounds(250, 250, 100, 25);
         lblPassword.setFont(new Font("Arial", Font.BOLD, 15));
         lblPassword.setForeground(new Color(102, 51, 0));
 
         txtUsername = new JTextField();
-        txtUsername.setBounds(150, 80, 150, 25);
+        txtUsername.setBounds(350, 200, 180, 25);
         txtUsername.setFont(new Font("Arial", Font.PLAIN, 15));
 
         txtPassword = new JPasswordField();
-        txtPassword.setBounds(150, 120, 150, 25);
+        txtPassword.setBounds(350, 250, 180, 25);
         txtPassword.setFont(new Font("Arial", Font.PLAIN, 15));
 
         btnLogin = new JButton("Login");
-        btnLogin.setBounds(50, 180, 100, 30);
+        btnLogin.setBounds(250, 300, 100, 30);
         btnLogin.setFont(new Font("Arial", Font.BOLD, 15));
         btnLogin.setBackground(Color.WHITE); 
         btnLogin.setForeground(new Color(102, 51, 0)); 
         btnLogin.addActionListener(this);
 
         btnBack = new JButton("Back");
-        btnBack.setBounds(200, 180, 100, 30);
+        btnBack.setBounds(430, 300, 100, 30);
         btnBack.setFont(new Font("Arial", Font.BOLD, 15));
         btnBack.setBackground(Color.WHITE); 
         btnBack.setForeground(new Color(102, 51, 0)); ; 
         btnBack.addActionListener(this);
-
+        
         add(lblTitle);
         add(lblUsername);
         add(lblPassword);
@@ -65,11 +71,8 @@ public class AdminLogin extends JFrame implements ActionListener {
         add(txtPassword);
         add(btnLogin);
         add(btnBack);
+     
 
-        setSize(800,800);
-        setVisible(true);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setResizable(false);
     }
 
     private void initializeDBConnection() {

@@ -10,8 +10,9 @@ public class AdminMenu extends JFrame implements ActionListener {
 
     public AdminMenu() {
         setTitle("Admin Menu");
-        setSize(400, 220);
-        setLayout(null);     
+        setSize(800, 600);
+        setLayout(null);  
+        setLocationRelativeTo(null);
         getContentPane().setBackground(new Color(255, 204, 153));
         
         btnViewRecords = new JButton("View Records");

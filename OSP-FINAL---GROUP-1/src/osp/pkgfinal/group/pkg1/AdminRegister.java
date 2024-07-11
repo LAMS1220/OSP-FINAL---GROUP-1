@@ -18,58 +18,73 @@ public class AdminRegister extends JFrame implements ActionListener {
         initializeDBConnection();
 
         setTitle("Admin Registration");
-        setSize(400, 300);
+        setSize(800, 600);
         setLayout(null);
+        setLocationRelativeTo(null);
         getContentPane().setBackground(new Color(255, 204, 153));
 
         lblTitle = new JLabel("ADMIN REGISTRATION");
-        lblTitle.setBounds(75, 20, 250, 30);
-        lblTitle.setFont(new Font("Georgia", Font.BOLD, 19)); 
+        lblTitle.setFont(new Font("Georgia", Font.BOLD, 20)); 
         lblTitle.setForeground(new Color(102, 51, 0));
-       
+        add(lblTitle);
+
         lblUsername = new JLabel("Username:");
-        lblUsername.setBounds(50, 80, 100, 25);
         lblUsername.setFont(new Font("Arial", Font.BOLD, 14));
         lblUsername.setForeground(new Color(102, 51, 0)); 
+        add(lblUsername);
 
         lblPassword = new JLabel("Password:");
-        lblPassword.setBounds(50, 120, 100, 25);
         lblPassword.setFont(new Font("Arial", Font.BOLD, 14));
         lblPassword.setForeground(new Color(102, 51, 0)); 
+        add(lblPassword);
 
         txtfldUsername = new JTextField();
-        txtfldUsername.setBounds(150, 80, 180, 25);
         txtfldUsername.setFont(new Font("Arial", Font.PLAIN, 14));
+        add(txtfldUsername);
 
         txtfldPassword = new JPasswordField();
-        txtfldPassword.setBounds(150, 120, 180, 25);
         txtfldPassword.setFont(new Font("Arial", Font.PLAIN, 14));
+        add(txtfldPassword);
 
         btnRegister = new JButton("Register");
-        btnRegister.setBounds(50, 180, 100, 30);
         btnRegister.setFont(new Font("Arial", Font.BOLD, 14));
         btnRegister.setBackground(Color.WHITE); 
         btnRegister.setForeground(new Color(102, 51, 0)); 
         btnRegister.addActionListener(this);
+        add(btnRegister);
 
         btnBack = new JButton("Back");
-        btnBack.setBounds(230, 180, 100, 30);
         btnBack.setFont(new Font("Arial", Font.BOLD, 14));
         btnBack.setBackground(Color.WHITE); 
         btnBack.setForeground(new Color(102, 51, 0)); 
         btnBack.addActionListener(this);
-
-        add(lblTitle);
-        add(lblUsername);
-        add(lblPassword);
-        add(txtfldUsername);
-        add(txtfldPassword);
-        add(btnRegister);
         add(btnBack);
+
+        setComponentBounds();
+
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            @Override
+            public void componentResized(java.awt.event.ComponentEvent e) {
+                setComponentBounds();
+            }
+        });
 
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
+    }
+
+    private void setComponentBounds() {
+        int frameWidth = getWidth();
+        int frameHeight = getHeight();
+
+        lblTitle.setBounds((frameWidth - 250) / 2, (frameHeight - 30) / 2 - 170, 280, 30);
+        lblUsername.setBounds((frameWidth - 100) / 2 - 100, (frameHeight - 25) / 2 - 100, 100, 25);
+        lblPassword.setBounds((frameWidth - 100) / 2 - 100, (frameHeight - 25) / 2 - 60, 100, 25);
+        txtfldUsername.setBounds((frameWidth - 180) / 2 + 50, (frameHeight - 25) / 2 - 100, 180, 25);
+        txtfldPassword.setBounds((frameWidth - 180) / 2 + 50, (frameHeight - 25) / 2 - 60, 180, 25);
+        btnRegister.setBounds((frameWidth - 100) / 2 - 90, (frameHeight - 30) / 2, 100, 30);
+        btnBack.setBounds((frameWidth - 100) / 2 + 90, (frameHeight - 30) / 2, 100, 30);
     }
 
     private void initializeDBConnection() {
