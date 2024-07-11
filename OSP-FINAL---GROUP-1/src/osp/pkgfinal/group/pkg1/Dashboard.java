@@ -2,6 +2,7 @@ package osp.pkgfinal.group.pkg1;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -45,10 +46,11 @@ public class Dashboard extends JFrame implements ActionListener {
         tableModel = new DefaultTableModel(columnNames, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
-                return false;
+                return column == 5; 
             }
         };
         table = new JTable(tableModel);
+
         JScrollPane scrollPane = new JScrollPane(table);
 
         btnDelete = new JButton("Delete");
@@ -135,7 +137,8 @@ public class Dashboard extends JFrame implements ActionListener {
         JTextField txtCustomerName = new JTextField(customerName);
         JTextField txtCustomerAddress = new JTextField(customerAddress);
         JTextField txtCustomerPhone = new JTextField(customerPhone);
-        JTextField txtPaymentStatus = new JTextField(paymentStatus);
+        JComboBox<String> cmbPaymentStatus = new JComboBox<>(new String[]{"Pending", "Paid", "Cancelled"});
+        cmbPaymentStatus.setSelectedItem(paymentStatus);
 
         JPanel panel = new JPanel(new GridLayout(6, 2));
         panel.add(new JLabel("Item Name:"));
@@ -149,7 +152,7 @@ public class Dashboard extends JFrame implements ActionListener {
         panel.add(new JLabel("Customer Phone:"));
         panel.add(txtCustomerPhone);
         panel.add(new JLabel("Payment Status:"));
-        panel.add(txtPaymentStatus);
+        panel.add(cmbPaymentStatus);
 
         int result = JOptionPane.showConfirmDialog(null, panel, "Edit Row", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
         if (result == JOptionPane.OK_OPTION) {
@@ -159,7 +162,7 @@ public class Dashboard extends JFrame implements ActionListener {
                 stmt.setString(1, txtCustomerName.getText());
                 stmt.setString(2, txtCustomerAddress.getText());
                 stmt.setString(3, txtCustomerPhone.getText());
-                stmt.setString(4, txtPaymentStatus.getText());
+                stmt.setString(4, (String) cmbPaymentStatus.getSelectedItem());
                 stmt.setString(5, customerName);
                 stmt.executeUpdate();
             } catch (SQLException e) {
@@ -171,7 +174,7 @@ public class Dashboard extends JFrame implements ActionListener {
             tableModel.setValueAt(txtCustomerName.getText(), row, 2);
             tableModel.setValueAt(txtCustomerAddress.getText(), row, 3);
             tableModel.setValueAt(txtCustomerPhone.getText(), row, 4);
-            tableModel.setValueAt(txtPaymentStatus.getText(), row, 5);
+            tableModel.setValueAt(cmbPaymentStatus.getSelectedItem(), row, 5);
         }
     }
 

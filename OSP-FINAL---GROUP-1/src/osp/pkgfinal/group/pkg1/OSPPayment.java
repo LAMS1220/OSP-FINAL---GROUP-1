@@ -10,9 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OSPPayment extends JFrame implements ActionListener {
-    private JLabel lblname, lbladd, lblcontact, lblcustomer, lblmop, lblamount, lblSelectedItems, lblTotalPrice, imglogo;
+    private JLabel lblname, lbladd, lblcontact, lblcustomer, lblmop, lblSelectedItems, lblTotalPrice, imglogo;
     private JButton btnPurchase, btnHome, btnDelete, btnReceipt;
-    private JTextField txtname, txtadd, txtcontact, txtamount;
+    private JTextField txtname, txtadd, txtcontact;
     private JComboBox<String> cmbmop;
     private JPanel customerPanel, itemsPanel, buttonPanel;
     private JScrollPane scrollPane;
@@ -65,12 +65,8 @@ public class OSPPayment extends JFrame implements ActionListener {
         lblcontact.setBounds(100, 150, 100, 30);
         lblcontact.setFont(new Font("Arial", Font.BOLD, 15));
 
-        lblamount = new JLabel("Amount:");
-        lblamount.setBounds(100, 190, 100, 30);
-        lblamount.setFont(new Font("Arial", Font.BOLD, 15));
-
         lblmop = new JLabel("Mode of Payment:");
-        lblmop.setBounds(100, 230, 150, 30);
+        lblmop.setBounds(100, 190, 150, 30);
         lblmop.setFont(new Font("Arial", Font.BOLD, 15));
 
         txtname = new JTextField();
@@ -85,13 +81,9 @@ public class OSPPayment extends JFrame implements ActionListener {
         txtcontact.setBounds(250, 150, 200, 30);
         txtcontact.setFont(new Font("Arial", Font.PLAIN, 15));
 
-        txtamount = new JTextField();
-        txtamount.setBounds(250, 190, 200, 30);
-        txtamount.setFont(new Font("Arial", Font.PLAIN, 15));
-
         String[] paymentMethods = {"Cash on Delivery", "GCash", "Paymaya"};
         cmbmop = new JComboBox<>(paymentMethods);
-        cmbmop.setBounds(250, 230, 200, 30);
+        cmbmop.setBounds(250, 190, 200, 30);
         cmbmop.setFont(new Font("Arial", Font.PLAIN, 15));
         cmbmop.setBackground(Color.WHITE); 
         cmbmop.setForeground(new Color(102, 51, 0));
@@ -100,12 +92,10 @@ public class OSPPayment extends JFrame implements ActionListener {
         add(lblname);
         add(lbladd);
         add(lblcontact);
-        add(lblamount);
         add(lblmop);
         add(txtname);
         add(txtadd);
         add(txtcontact);
-        add(txtamount);
         add(cmbmop);
 
         itemsPanel = new JPanel();
@@ -203,7 +193,7 @@ public class OSPPayment extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == btnPurchase) {
-            if (txtname.getText().isEmpty() || txtadd.getText().isEmpty() || txtcontact.getText().isEmpty() || txtamount.getText().isEmpty()) {
+            if (txtname.getText().isEmpty() || txtadd.getText().isEmpty() || txtcontact.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(this, "All fields must be filled out");
                 return;
             }
@@ -219,7 +209,7 @@ public class OSPPayment extends JFrame implements ActionListener {
                         stmt.setString(2, txtname.getText());
                         stmt.setString(3, txtadd.getText());
                         stmt.setString(4, txtcontact.getText());
-                        stmt.setDouble(5, Double.parseDouble(txtamount.getText()));
+                        stmt.setDouble(5, totalPrice);  
                         stmt.setString(6, cmbmop.getSelectedItem().toString());
                         stmt.setString(7, "Pending");
                         stmt.executeUpdate();
@@ -244,9 +234,8 @@ public class OSPPayment extends JFrame implements ActionListener {
                 JOptionPane.showMessageDialog(this, "Please select an item to delete");
             }
         } else if (e.getSource() == btnReceipt) {
-            double amount = Double.parseDouble(txtamount.getText());
-            double updatedTotalPrice = totalPrice - amount;
-            new Receipt(txtname.getText(), txtadd.getText(), txtcontact.getText(), txtamount.getText(), cmbmop.getSelectedItem().toString(), selectedItems, updatedTotalPrice);
+            new Receipt(txtname.getText(), txtadd.getText(), txtcontact.getText(), cmbmop.getSelectedItem().toString(), selectedItems, totalPrice);
+            dispose();
         }
     }
 

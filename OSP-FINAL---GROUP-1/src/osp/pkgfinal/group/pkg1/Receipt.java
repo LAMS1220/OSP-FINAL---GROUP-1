@@ -8,7 +8,7 @@ public class Receipt extends JFrame {
     private JTextArea receiptArea;
     private JScrollPane scrollPane;
 
-    public Receipt(String name, String address, String contact, String amount, String paymentMethod, List<String> items, double totalPrice) {
+    public Receipt(String name, String address, String contact, String paymentMethod, List<String> items, double totalPrice) {
         setTitle("Receipt");
         setSize(400, 500);
         setLayout(new BorderLayout());
@@ -23,7 +23,6 @@ public class Receipt extends JFrame {
         receiptText.append("Customer Name: ").append(name).append("\n");
         receiptText.append("Address: ").append(address).append("\n");
         receiptText.append("Contact No: ").append(contact).append("\n");
-        receiptText.append("Amount: ").append(amount).append("\n");
         receiptText.append("Payment Method: ").append(paymentMethod).append("\n");
         receiptText.append("\nItems:\n");
 
@@ -31,7 +30,7 @@ public class Receipt extends JFrame {
             receiptText.append(item).append("\n");
         }
 
-        receiptText.append("\nTotal Price after amount: $").append(totalPrice).append("\n");
+        receiptText.append("\nTotal Price: $").append(totalPrice).append("\n");
         receiptText.append("===============\n");
 
         receiptArea.setText(receiptText.toString());
@@ -41,4 +40,3 @@ public class Receipt extends JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 }
-

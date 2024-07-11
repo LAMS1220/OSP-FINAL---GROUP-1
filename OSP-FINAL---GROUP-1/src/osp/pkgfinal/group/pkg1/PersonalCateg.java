@@ -111,6 +111,7 @@ public class PersonalCateg extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        dispose();
         if (e.getSource() == btnHome) {
             dispose();
             new HomeCateg().setVisible(true);
@@ -122,6 +123,7 @@ public class PersonalCateg extends JFrame implements ActionListener {
             new WorkCateg().setVisible(true);
         } else if (e.getSource() == btnPayment) {
             new OSPPayment(getCartItems(), totalPrice).setVisible(true);
+            dispose();
         }
     }
 

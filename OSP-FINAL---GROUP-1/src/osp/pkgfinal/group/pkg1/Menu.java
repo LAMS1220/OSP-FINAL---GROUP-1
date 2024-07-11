@@ -28,7 +28,7 @@ public class Menu extends JFrame implements ActionListener {
         lblSignUp = new JLabel("Register as Administrator");
         lblSignUp.setFont(new Font("Bell MT", Font.PLAIN, 14));
 
-        btnRegister = new JButton("Sign Up");
+        btnRegister = new JButton("SIGN UP");
         btnRegister.setBackground(Color.WHITE); 
         btnRegister.setForeground(new Color(102, 51, 0));
         btnAdmin = new JButton("ADMIN");
@@ -37,7 +37,6 @@ public class Menu extends JFrame implements ActionListener {
         btncus = new JButton ("CUSTOMER");
         btncus.setBackground(Color.WHITE); 
         btncus.setForeground(new Color(102, 51, 0));
-        
         
         add(lblTitle);
         add(btnRegister);
