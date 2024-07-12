@@ -18,14 +18,12 @@ public class AdminLogin extends JFrame implements ActionListener {
 
         setTitle("Admin Login");
         setLayout(null); 
-        setLocationRelativeTo(null);
-        setTitle("Admin Login");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 600);
-        setLocationRelativeTo(null);
         setResizable(true);
+        setLocationRelativeTo(null);
+        setVisible(true);
         getContentPane().setBackground(new Color(255, 204, 153));
-        
         
         lblTitle = new JLabel("ADMIN LOGIN");
         lblTitle.setFont(new Font("Georgia", Font.BOLD, 24));
@@ -61,7 +59,7 @@ public class AdminLogin extends JFrame implements ActionListener {
         btnBack.setBounds(430, 300, 100, 30);
         btnBack.setFont(new Font("Arial", Font.BOLD, 15));
         btnBack.setBackground(Color.WHITE); 
-        btnBack.setForeground(new Color(102, 51, 0)); ; 
+        btnBack.setForeground(new Color(102, 51, 0)); 
         btnBack.addActionListener(this);
         
         add(lblTitle);
@@ -71,8 +69,6 @@ public class AdminLogin extends JFrame implements ActionListener {
         add(txtPassword);
         add(btnLogin);
         add(btnBack);
-     
-
     }
 
     private void initializeDBConnection() {
@@ -95,12 +91,16 @@ public class AdminLogin extends JFrame implements ActionListener {
             String username = txtUsername.getText();
             String password = new String(txtPassword.getPassword());
 
-            if (!loginAdmin(username, password)) {
-                JOptionPane.showMessageDialog(this, "Invalid credentials", "Error", JOptionPane.ERROR_MESSAGE);
+            if (username.isEmpty() || password.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Username and Password cannot be empty.", "Error", JOptionPane.ERROR_MESSAGE);
             } else {
-                JOptionPane.showMessageDialog(this, "Login successful", "Success", JOptionPane.INFORMATION_MESSAGE);
-                dispose();
-                new Dashboard().setVisible(true);
+                if (loginAdmin(username, password)) {
+                    JOptionPane.showMessageDialog(this, "Login successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                    dispose();
+                    new Dashboard().setVisible(true);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Invalid credentials.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
             }
         } else if (e.getSource() == btnBack) {
             dispose();
@@ -109,14 +109,22 @@ public class AdminLogin extends JFrame implements ActionListener {
     }
 
     private boolean loginAdmin(String username, String password) {
-        try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM admins WHERE username = ? AND password = ?")) {
+        String query = "SELECT password FROM admins WHERE username = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setString(1, username);
-            stmt.setString(2, password);
             try (ResultSet rs = stmt.executeQuery()) {
-                return rs.next();
+                if (rs.next()) {
+                    String storedPassword = rs.getString("password");
+                    return password.equals(storedPassword);
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return false;
-    }}
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(AdminLogin::new);
+    }
+}

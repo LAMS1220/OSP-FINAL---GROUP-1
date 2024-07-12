@@ -197,16 +197,6 @@ public class PersonalCateg extends JFrame implements ActionListener {
                 insertItemStmt.setDouble(2, itemPrice);
                 insertItemStmt.executeUpdate();
 
-                try (ResultSet generatedKeys = insertItemStmt.getGeneratedKeys()) {
-                    if (generatedKeys.next()) {
-                        int itemId = generatedKeys.getInt(1);
-                        try (PreparedStatement insertPaymentStmt = conn.prepareStatement("INSERT INTO payments (item_id, price) VALUES (?, ?)")) {
-                            insertPaymentStmt.setInt(1, itemId);
-                            insertPaymentStmt.setDouble(2, itemPrice);
-                            insertPaymentStmt.executeUpdate();
-                        }
-                    }
-                }
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }

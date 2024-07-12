@@ -200,7 +200,7 @@ public class OSPPayment extends JFrame implements ActionListener {
             }
 
             try (PreparedStatement stmt = conn.prepareStatement(
-                    "INSERT INTO payments (item_id, customer_name, customer_address, customer_phone, amount, payment_method, payment_status) " +
+                    "INSERT INTO payments (item_id, customer_name, customer_address, customer_phone, price, payment_method, payment_status) " +
                             "VALUES (?, ?, ?, ?, ?, ?, ?)"
             )) {
                 for (String item : selectedItems) {
@@ -226,7 +226,7 @@ public class OSPPayment extends JFrame implements ActionListener {
             SwingUtilities.invokeLater(() -> new HomePage());
             dispose();
         } else if (e.getSource() == btnDelete) {
-            int selectedRow = selectedItemsTable.getSelectedRow();
+            int selectedRow = selectedItemsTable.getSelectedRow();  
             if (selectedRow >= 0) {
                 tableModel.removeRow(selectedRow);
                 selectedItems.remove(selectedRow);

@@ -197,22 +197,7 @@ public class WorkCateg extends JFrame implements ActionListener {
                 insertItemStmt.setString(1, itemName);
                 insertItemStmt.setDouble(2, itemPrice);
                 insertItemStmt.executeUpdate();
-                try (ResultSet generatedKeys = insertItemStmt.getGeneratedKeys()) {
-                    if (generatedKeys.next()) {
-                        int itemId = generatedKeys.getInt(1);
-                        try (PreparedStatement insertPaymentStmt = conn.prepareStatement("INSERT INTO payments (item_id, customer_name, customer_address, customer_phone, payment_status, amount, payment_method) VALUES (?, ?, ?, ?, ?, ?, ?)")) {
-                            insertPaymentStmt.setInt(1, itemId);
-                            insertPaymentStmt.setString(2, "Customer Name");
-                            insertPaymentStmt.setString(3, "Customer Address");
-                            insertPaymentStmt.setString(4, "Customer Phone");
-                            insertPaymentStmt.setString(5, "Pending");
-                            insertPaymentStmt.setDouble(6, itemPrice);
-                            insertPaymentStmt.setString(7, "default_method");
-                            System.out.println("Executing query: " + insertPaymentStmt);
-                            insertPaymentStmt.executeUpdate();
-                        }
-                    }
-                }
+              
             } catch (SQLException ex) {
                 ex.printStackTrace();
                 JOptionPane.showMessageDialog(WorkCateg.this, "Failed to add item to cart: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
